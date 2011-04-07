@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6" />
+	<Project>
+		<Option title="GBS" />
+		<Option pch_mode="2" />
+		<Option compiler="gcc" />
+		<Build>
+			<Target title="Debug">
+				<Option output="bin/Debug/GBS" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj/Debug/" />
+				<Option type="0" />
+				<Option compiler="gcc" />
+				<Option projectLinkerOptionsRelation="2" />
+				<Compiler>
+					<Add option="-g" />
+					<Add option="`wx-config  --version=2.9 --static=yes --unicode=yes --debug=yes --cflags`" />
+				</Compiler>
+				<Linker>
+					<Add option="`wx-config  --version=2.9 --static=yes --unicode=yes --debug=yes --libs`" />
+				</Linker>
+			</Target>
+			<Target title="Release">
+				<Option output="bin/Release/GBS" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj/Release/" />
+				<Option type="0" />
+				<Option compiler="gcc" />
+				<Option projectLinkerOptionsRelation="2" />
+				<Compiler>
+					<Add option="-O2" />
+					<Add option="`wx-config  --version=2.9 --static=yes --unicode=yes --debug=no --cflags`" />
+				</Compiler>
+				<Linker>
+					<Add option="-s" />
+					<Add option="`wx-config  --version=2.9 --static=yes --unicode=yes --debug=no --libs`" />
+				</Linker>
+			</Target>
+		</Build>
+		<Compiler>
+			<Add option="-Wall" />
+		</Compiler>
+		<Unit filename="../GUIFrame.cpp" />
+		<Unit filename="../GUIFrame.h" />
+		<Unit filename="../GraphBitStreamerApp.cpp" />
+		<Unit filename="../GraphBitStreamerApp.h" />
+		<Unit filename="../GraphBitStreamerMain.cpp" />
+		<Unit filename="../GraphBitStreamerMain.h" />
+		<Unit filename="../PalDialog.cpp" />
+		<Unit filename="../PalDialog.h" />
+		<Unit filename="../SettingsDialog.cpp" />
+		<Unit filename="../SettingsDialog.h" />
+		<Unit filename="../bmpie.cpp" />
+		<Unit filename="../bmpie.h" />
+		<Unit filename="../hexnum.cpp" />
+		<Unit filename="../hexnum.h" />
+		<Unit filename="../hexnumdialog.cpp" />
+		<Unit filename="../hexnumdialog.h" />
+		<Unit filename="../openpal.cpp" />
+		<Unit filename="../openpal.h" />
+		<Unit filename="../scrolled.cpp" />
+		<Unit filename="../scrolled.h" />
+		<Unit filename="../settings.cpp" />
+		<Unit filename="../settings.h" />
+		<Unit filename="../slstrings.cpp" />
+		<Unit filename="../slstrings.h" />
+		<Unit filename="../version.h" />
+		<Unit filename="../vgapal.h" />
+		<Unit filename="../wx_pch.cpp" />
+		<Unit filename="../wx_pch.h" />
+		<Extensions>
+			<code_completion />
+			<debugger />
+		</Extensions>
+	</Project>
+</CodeBlocks_project_file>

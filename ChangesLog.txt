@@ -1,0 +1,73 @@
+28 March 2011
+   released version 1.1.1
+	-Added:   Linux support.
+	-Updated: Splash screen removed from taskbar.
+
+02 March 2011
+   rebuild of version 1.1.0
+	-Updated: Программа избавлена от необходимости установки vcredist_x86.exe
+
+07 January 2011
+   released version 1.1.0 of GraphBitStreamer
+
+     Change log:
+        -Updated: Перекомпилирован под MS VC 2008.
+
+18 December 2010
+   released version 1.0.7 of GraphBitStreamer
+
+     Change log:
+        -New: Режим палитры сохраняется в файле проекта.
+        -New: Размер окна сохраняется в файле проекта.
+        -Fixed: Ошибка возникала при выборе своей палитры не задав имени файла.
+        -Applied: После выбора файла своей палитры, она применяется автоматически.
+
+22 November 2010
+   released version 1.0.6 of GraphBitStreamer
+
+     Change log:
+        -Added: Экспорт RAW данных, для тех случаев, когда нужна обработка НЕ графики.
+        -Added: Настройки экспорта.
+        -Applied: Обновлены иконки.
+
+24 October 2010
+   released version 1.0.5 of GraphBitStreamer
+
+     Change log:
+        -Added: Запоминает до десяти позиций редактора с Ctrl (0 - 9), восстанавливает с Shift (0 - 9)
+
+24 October 2010
+   released version 1.0.4 of GraphBitStreamer
+
+     Change log:
+        -Added: Toolbar
+        -Added: Работа с truecolor
+        -Added: Теперь можно перевернуть, повернуть картинку.
+        -Added: Импорт и экспорт 24 битных BMP
+        -Fixed: Неверно обрабатывались числа более 32 бит.
+
+23 October 2010
+   released version 1.0.3 of GraphBitStreamer
+
+     Change log:
+        -Updated: Увеличено максимальное значение бит на пиксел
+        -Fixed: Исправлена ошибка с отрицательным значением стартового бита
+        	из-за которой версия 1.0.2 - не пригодна к использованию.
+
+22 October 2010
+   released version 1.0.2 of GraphBitStreamer
+
+     Change log:
+        -Added: Нажатие Enter применяет введённые значения.
+        -Added: Линии сетки можно инвертировать.
+        -Added: Если изображение выходит за границы файла программа обозначит это на картинке.
+        -Added: При выборе не заданной пользовательской палитры предлагается её задать.
+        -Added: Прыжок к указанной позиции в файле
+        -Fixed: Поведение кнопки "Next line"
+
+21 October 2010
+   released version 1.0.1 of GraphBitStreamer
+
+     Change log:
+        -Added: BMP import/export
+
