@@ -40,6 +40,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
+				AdditionalIncludeDirectories="$(WXWIN)/include;$(WXWIN)/lib/vc_lib/mswud"
 				PreprocessorDefinitions="__WXMSW__;WIN32;wxUSE_GUI=1;wxUSE_UNICODE;__WXDEBUG__;_UNICODE"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
@@ -114,6 +115,7 @@
 				Name="VCCLCompilerTool"
 				Optimization="2"
 				EnableIntrinsicFunctions="true"
+				AdditionalIncludeDirectories="$(WXWIN)/include;$(WXWIN)/lib/vc_lib/mswu"
 				PreprocessorDefinitions="__WXMSW__;WIN32;__WIN32__;wxUSE_GUI=1;wxUSE_UNICODE;NDEBUG"
 				RuntimeLibrary="0"
 				EnableFunctionLevelLinking="true"
@@ -133,6 +135,7 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
+				AdditionalDependencies="Rpcrt4.lib comctl32.lib wxbase29u.lib wxbase29u_net.lib wxbase29u_xml.lib wxexpat.lib wxjpeg.lib wxmsw29u_adv.lib wxmsw29u_aui.lib wxmsw29u_core.lib wxmsw29u_gl.lib wxmsw29u_html.lib wxmsw29u_media.lib wxmsw29u_propgrid.lib wxmsw29u_qa.lib wxmsw29u_ribbon.lib wxmsw29u_richtext.lib wxmsw29u_stc.lib wxmsw29u_webview.lib wxmsw29u_xrc.lib wxpng.lib wxregexu.lib wxscintilla.lib wxtiff.lib wxzlib.lib"
 				OutputFile="$(ProjectDir)..\Release\Windows\$(ProjectName).exe"
 				AdditionalLibraryDirectories="&quot;$(WXWIN)\lib\vc_lib&quot;"
 				GenerateDebugInformation="false"

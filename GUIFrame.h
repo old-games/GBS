@@ -1,15 +1,16 @@
 ///////////////////////////////////////////////////////////////////////////
-// C++ code generated with wxFormBuilder (version Mar  8 2011)
+// C++ code generated with wxFormBuilder (version Oct  8 2012)
 // http://www.wxformbuilder.org/
 //
 // PLEASE DO "NOT" EDIT THIS FILE!
 ///////////////////////////////////////////////////////////////////////////
 
-#ifndef __GUIFrame__
-#define __GUIFrame__
+#ifndef __GUIFRAME_H__
+#define __GUIFRAME_H__
 
+#include <wx/artprov.h>
+#include <wx/xrc/xmlres.h>
 #include <wx/intl.h>
-
 #include <wx/string.h>
 #include <wx/bitmap.h>
 #include <wx/image.h>
@@ -23,7 +24,6 @@
 #include <wx/stattext.h>
 #include <wx/slider.h>
 #include <wx/spinctrl.h>
-#include <wx/valtext.h>
 #include <wx/statline.h>
 #include <wx/button.h>
 #include <wx/sizer.h>
@@ -153,8 +153,9 @@ class GUIFrame : public wxFrame
 	public:
 		
 		GUIFrame( wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = _("GBS"), const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxSize( 712,600 ), long style = wxDEFAULT_FRAME_STYLE|wxTAB_TRAVERSAL );
+		
 		~GUIFrame();
 	
 };
 
-#endif //__GUIFrame__
+#endif //__GUIFRAME_H__

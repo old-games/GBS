@@ -1,3 +1,7 @@
+24 May 2013
+   released version 1.1.2
+	-Updated: Width's and height's maximum value increased to 4096
+
 28 March 2011
    released version 1.1.1
 	-Added:   Linux support.

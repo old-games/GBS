@@ -1,5 +1,5 @@
 ///////////////////////////////////////////////////////////////////////////
-// C++ code generated with wxFormBuilder (version Mar  8 2011)
+// C++ code generated with wxFormBuilder (version Oct  8 2012)
 // http://www.wxformbuilder.org/
 //
 // PLEASE DO "NOT" EDIT THIS FILE!
@@ -46,8 +46,7 @@ GUIFrame::GUIFrame( wxWindow* parent, wxWindowID id, const wxString& title, cons
 	#endif
 	fileMenu->Append( menuFileLoad );
 	
-	wxMenuItem* m_separator1;
-	m_separator1 = fileMenu->AppendSeparator();
+	fileMenu->AppendSeparator();
 	
 	wxMenuItem* menuLoadState;
 	menuLoadState = new wxMenuItem( fileMenu, idMenuLoadState, wxString( _("L&oad project") ) + wxT('\t') + wxT("Ctrl+L"), _("Load stored program state"), wxITEM_NORMAL );
@@ -66,8 +65,7 @@ GUIFrame::GUIFrame( wxWindow* parent, wxWindowID id, const wxString& title, cons
 	#endif
 	fileMenu->Append( menuSaveState );
 	
-	wxMenuItem* m_separator2;
-	m_separator2 = fileMenu->AppendSeparator();
+	fileMenu->AppendSeparator();
 	
 	wxMenuItem* menuFileQuit;
 	menuFileQuit = new wxMenuItem( fileMenu, idMenuQuit, wxString( _("&Quit") ) + wxT('\t') + wxT("Alt+F4"), _("Quit the application"), wxITEM_NORMAL );
@@ -97,8 +95,7 @@ GUIFrame::GUIFrame( wxWindow* parent, wxWindowID id, const wxString& title, cons
 	#endif
 	editMenu->Append( menuExportBMP );
 	
-	wxMenuItem* m_separator3;
-	m_separator3 = editMenu->AppendSeparator();
+	editMenu->AppendSeparator();
 	
 	menuExportRAW = new wxMenuItem( editMenu, idExportRAW, wxString( _("&RAW export") ) + wxT('\t') + wxT("F6"), _("Exports raw data"), wxITEM_NORMAL );
 	#ifdef __WXMSW__
@@ -108,8 +105,7 @@ GUIFrame::GUIFrame( wxWindow* parent, wxWindowID id, const wxString& title, cons
 	#endif
 	editMenu->Append( menuExportRAW );
 	
-	wxMenuItem* m_separator4;
-	m_separator4 = editMenu->AppendSeparator();
+	editMenu->AppendSeparator();
 	
 	wxMenuItem* menuSettings;
 	menuSettings = new wxMenuItem( editMenu, idSettingsMenu, wxString( _("&Settings") ) + wxT('\t') + wxT("F12"), _("Current settings"), wxITEM_NORMAL );
@@ -214,6 +210,7 @@ GUIFrame::GUIFrame( wxWindow* parent, wxWindowID id, const wxString& title, cons
 	
 	gSizer3->Add( pageRigthBtn, 0, wxALIGN_CENTER_VERTICAL, 5 );
 	
+	
 	sbSizer1->Add( gSizer3, 0, wxALIGN_CENTER_HORIZONTAL, 5 );
 	
 	jumpBtn = new wxButton( m_panel1, wxID_ANY, _("Jump to offset"), wxDefaultPosition, wxSize( -1,20 ), 0 );
@@ -226,10 +223,10 @@ GUIFrame::GUIFrame( wxWindow* parent, wxWindowID id, const wxString& title, cons
 	m_staticText3->Wrap( -1 );
 	sbSizer1->Add( m_staticText3, 0, wxALL, 5 );
 	
-	widthSlider = new wxSlider( m_panel1, wxID_WIDTH_SLIDER, 8, 1, 1280, wxDefaultPosition, wxDefaultSize, wxSL_HORIZONTAL );
+	widthSlider = new wxSlider( m_panel1, wxID_WIDTH_SLIDER, 8, 1, 4096, wxDefaultPosition, wxDefaultSize, wxSL_HORIZONTAL );
 	sbSizer1->Add( widthSlider, 0, wxALIGN_CENTER_HORIZONTAL|wxTOP|wxBOTTOM|wxEXPAND, 5 );
 	
-	widthCtrl = new wxSpinCtrl( m_panel1, wxID_WIDTH_CTRL, wxEmptyString, wxDefaultPosition, wxDefaultSize, wxSP_ARROW_KEYS, 1, 1280, 8 );
+	widthCtrl = new wxSpinCtrl( m_panel1, wxID_WIDTH_CTRL, wxEmptyString, wxDefaultPosition, wxDefaultSize, wxSP_ARROW_KEYS, 1, 4096, 8 );
 	sbSizer1->Add( widthCtrl, 0, wxTOP|wxBOTTOM|wxALIGN_CENTER_HORIZONTAL|wxEXPAND, 5 );
 	
 	m_staticline3 = new wxStaticLine( m_panel1, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxLI_HORIZONTAL );
@@ -239,11 +236,12 @@ GUIFrame::GUIFrame( wxWindow* parent, wxWindowID id, const wxString& title, cons
 	m_staticText4->Wrap( -1 );
 	sbSizer1->Add( m_staticText4, 0, wxALL, 5 );
 	
-	heightSlider = new wxSlider( m_panel1, wxID_HEIGHT_SLIDER, 8, 1, 1024, wxDefaultPosition, wxDefaultSize, wxSL_HORIZONTAL );
+	heightSlider = new wxSlider( m_panel1, wxID_HEIGHT_SLIDER, 8, 1, 4096, wxDefaultPosition, wxDefaultSize, wxSL_HORIZONTAL );
 	sbSizer1->Add( heightSlider, 0, wxALIGN_CENTER_HORIZONTAL|wxTOP|wxBOTTOM|wxEXPAND, 5 );
 	
-	heightCtrl = new wxSpinCtrl( m_panel1, wxID_HEIGHT_CTRL, wxT("8"), wxDefaultPosition, wxDefaultSize, wxSP_ARROW_KEYS, 1, 1024, 200 );
+	heightCtrl = new wxSpinCtrl( m_panel1, wxID_HEIGHT_CTRL, wxT("8"), wxDefaultPosition, wxDefaultSize, wxSP_ARROW_KEYS, 1, 4096, 8 );
 	sbSizer1->Add( heightCtrl, 0, wxALIGN_CENTER_HORIZONTAL|wxTOP|wxBOTTOM|wxEXPAND, 5 );
+	
 	
 	gSizer2->Add( sbSizer1, 1, wxEXPAND|wxTOP|wxBOTTOM|wxLEFT, 5 );
 	
@@ -271,6 +269,7 @@ GUIFrame::GUIFrame( wxWindow* parent, wxWindowID id, const wxString& title, cons
 	
 	gridInvert = new wxCheckBox( m_panel1, wxID_ANY, _("Invert grid"), wxDefaultPosition, wxDefaultSize, 0 );
 	gSizer4->Add( gridInvert, 0, wxTOP|wxBOTTOM|wxALIGN_CENTER_VERTICAL|wxALIGN_RIGHT, 5 );
+	
 	
 	sbSizer3->Add( gSizer4, 0, wxALIGN_CENTER_HORIZONTAL|wxEXPAND, 5 );
 	
@@ -310,37 +309,55 @@ GUIFrame::GUIFrame( wxWindow* parent, wxWindowID id, const wxString& title, cons
 	
 	sbSizer3->Add( cancelBtn, 0, wxALIGN_CENTER_HORIZONTAL|wxTOP|wxEXPAND, 5 );
 	
+	
 	gSizer2->Add( sbSizer3, 1, wxEXPAND|wxTOP|wxBOTTOM|wxLEFT, 5 );
+	
 	
 	fgSizer1->Add( gSizer2, 1, wxEXPAND, 5 );
 	
 	outSizer = new wxStaticBoxSizer( new wxStaticBox( m_panel1, wxID_ANY, _("Out:") ), wxVERTICAL );
 	
+	
 	fgSizer1->Add( outSizer, 1, wxEXPAND|wxALL, 5 );
+	
 	
 	m_panel1->SetSizer( fgSizer1 );
 	m_panel1->Layout();
 	fgSizer1->Fit( m_panel1 );
 	gSizer1->Add( m_panel1, 0, wxALIGN_CENTER_VERTICAL|wxALIGN_CENTER_HORIZONTAL|wxEXPAND, 5 );
 	
+	
 	this->SetSizer( gSizer1 );
 	this->Layout();
 	mainToolBar = this->CreateToolBar( wxTB_FLAT|wxTB_HORIZONTAL, wxID_ANY );
 	mainToolBar->SetToolBitmapSize( wxSize( 32,32 ) );
-	mainToolBar->AddTool( idMenuLoad, _("Load file"), wxBitmap( loadfile0_xpm ), wxNullBitmap, wxITEM_NORMAL, wxEmptyString, _("Loads file to explore") ); 
+	mainToolBar->AddTool( idMenuLoad, _("Load file"), wxBitmap( loadfile0_xpm ), wxNullBitmap, wxITEM_NORMAL, wxEmptyString, _("Loads file to explore"), NULL ); 
+	
 	mainToolBar->AddSeparator(); 
-	mainToolBar->AddTool( idMenuLoadState, _("Load project"), wxBitmap( loadprj0_xpm ), wxNullBitmap, wxITEM_NORMAL, wxEmptyString, _("Load stored program state") ); 
-	mainToolBar->AddTool( idMenuSaveState, _("Save project"), wxBitmap( saveprj0_xpm ), wxNullBitmap, wxITEM_NORMAL, wxEmptyString, _("Strore program state") ); 
+	
+	mainToolBar->AddTool( idMenuLoadState, _("Load project"), wxBitmap( loadprj0_xpm ), wxNullBitmap, wxITEM_NORMAL, wxEmptyString, _("Load stored program state"), NULL ); 
+	
+	mainToolBar->AddTool( idMenuSaveState, _("Save project"), wxBitmap( saveprj0_xpm ), wxNullBitmap, wxITEM_NORMAL, wxEmptyString, _("Strore program state"), NULL ); 
+	
 	mainToolBar->AddSeparator(); 
-	mainToolBar->AddTool( idImportBMP, _("Import BMP"), wxBitmap( bmpin0_xpm ), wxNullBitmap, wxITEM_NORMAL, wxEmptyString, _("Replace current image with loaded from BMP file") ); 
-	mainToolBar->AddTool( idExportBMP, _("Export BMP"), wxBitmap( bmpout0_xpm ), wxNullBitmap, wxITEM_NORMAL, wxEmptyString, _("Creates BMP file from current image") ); 
+	
+	mainToolBar->AddTool( idImportBMP, _("Import BMP"), wxBitmap( bmpin0_xpm ), wxNullBitmap, wxITEM_NORMAL, wxEmptyString, _("Replace current image with loaded from BMP file"), NULL ); 
+	
+	mainToolBar->AddTool( idExportBMP, _("Export BMP"), wxBitmap( bmpout0_xpm ), wxNullBitmap, wxITEM_NORMAL, wxEmptyString, _("Creates BMP file from current image"), NULL ); 
+	
 	mainToolBar->AddSeparator(); 
-	mainToolBar->AddTool( idLoadPlatte, _("Load palette"), wxBitmap( custompal0_xpm ), wxNullBitmap, wxITEM_NORMAL, wxEmptyString, _("Load palette from any file from any offset") ); 
+	
+	mainToolBar->AddTool( idLoadPlatte, _("Load palette"), wxBitmap( custompal0_xpm ), wxNullBitmap, wxITEM_NORMAL, wxEmptyString, _("Load palette from any file from any offset"), NULL ); 
+	
 	mainToolBar->AddSeparator(); 
-	mainToolBar->AddTool( idFlipImage, _("Flip"), wxBitmap( FLIP_xpm ), wxNullBitmap, wxITEM_NORMAL, wxEmptyString, _("Flip up and down") ); 
-	mainToolBar->AddTool( idRotateLeft, _("Rotate counterclockwise"), wxBitmap( aclockwise1_xpm ), wxNullBitmap, wxITEM_NORMAL, wxEmptyString, _("Rotate counterclockwise") ); 
-	mainToolBar->AddTool( idRotateRight, _("Rotate clockwise"), wxBitmap( clockwise1_xpm ), wxNullBitmap, wxITEM_NORMAL, wxEmptyString, _("Rotate clockwise") ); 
-	mainToolBar->Realize();
+	
+	mainToolBar->AddTool( idFlipImage, _("Flip"), wxBitmap( FLIP_xpm ), wxNullBitmap, wxITEM_NORMAL, wxEmptyString, _("Flip up and down"), NULL ); 
+	
+	mainToolBar->AddTool( idRotateLeft, _("Rotate counterclockwise"), wxBitmap( aclockwise1_xpm ), wxNullBitmap, wxITEM_NORMAL, wxEmptyString, _("Rotate counterclockwise"), NULL ); 
+	
+	mainToolBar->AddTool( idRotateRight, _("Rotate clockwise"), wxBitmap( clockwise1_xpm ), wxNullBitmap, wxITEM_NORMAL, wxEmptyString, _("Rotate clockwise"), NULL ); 
+	
+	mainToolBar->Realize(); 
 	
 	
 	this->Centre( wxBOTH );

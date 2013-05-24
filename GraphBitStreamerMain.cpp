@@ -133,7 +133,7 @@ bool GraphBitStreamerFrame::OpenMainFile(wxString name)
     if (!mFile.Access(name, wxFile::write))
     {
         mode = wxFile::read;
-        mReadOnly = trfue;
+        mReadOnly = true;
     }
     if (!mFile.Open(name, (wxFile::OpenMode) mode))
     {
@@ -662,11 +662,11 @@ void GraphBitStreamerFrame::PreparePalBMP()
             if (col < mMaxColors)
             {
                 brush.SetColour(wxColour(red[col], green[col], blue[col]));
-                if (col == mCurrentColor) 
+                if (col == mCurrentColor)
 				{
 						mdc.SetPen(wxPen(*wxWHITE, 2));
 				}
-                else 
+                else
 				{
 					mdc.SetPen(wxPen(*wxBLACK, 1));
 				}

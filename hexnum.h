@@ -3,6 +3,8 @@
 
 #include "hexnumdialog.h"
 #include <wx/valtext.h>
+#include <wx/log.h>
+
 class HexNum : public HexNumberDialog
 {
     public:
