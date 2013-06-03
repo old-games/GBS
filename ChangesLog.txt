@@ -1,3 +1,7 @@
+03 June 2013
+   version 1.1.2 rebuilt
+	-Updated: New resolution - 7680×4320
+
 24 May 2013
    released version 1.1.2
 	-Updated: Width's and height's maximum value increased to 4096

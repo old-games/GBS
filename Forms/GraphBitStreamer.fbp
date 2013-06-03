@@ -86,7 +86,7 @@
             <event name="OnSetFocus"></event>
             <event name="OnSize"></event>
             <event name="OnUpdateUI"></event>
-            <object class="wxMenuBar" expanded="1">
+            <object class="wxMenuBar" expanded="0">
                 <property name="bg"></property>
                 <property name="context_help"></property>
                 <property name="context_menu">1</property>
@@ -131,11 +131,11 @@
                 <event name="OnSetFocus"></event>
                 <event name="OnSize"></event>
                 <event name="OnUpdateUI"></event>
-                <object class="wxMenu" expanded="1">
+                <object class="wxMenu" expanded="0">
                     <property name="label">&amp;File</property>
                     <property name="name">fileMenu</property>
                     <property name="permission">protected</property>
-                    <object class="wxMenuItem" expanded="1">
+                    <object class="wxMenuItem" expanded="0">
                         <property name="bitmap">Load From File; ../icons/loadfile1.xpm</property>
                         <property name="checked">0</property>
                         <property name="enabled">1</property>
@@ -150,11 +150,11 @@
                         <event name="OnMenuSelection">onMenuFileLoad</event>
                         <event name="OnUpdateUI"></event>
                     </object>
-                    <object class="separator" expanded="1">
+                    <object class="separator" expanded="0">
                         <property name="name">m_separator1</property>
                         <property name="permission">none</property>
                     </object>
-                    <object class="wxMenuItem" expanded="1">
+                    <object class="wxMenuItem" expanded="0">
                         <property name="bitmap">Load From File; ../icons/loadprj1.xpm</property>
                         <property name="checked">0</property>
                         <property name="enabled">1</property>
@@ -169,7 +169,7 @@
                         <event name="OnMenuSelection">OnLoadState</event>
                         <event name="OnUpdateUI"></event>
                     </object>
-                    <object class="wxMenuItem" expanded="1">
+                    <object class="wxMenuItem" expanded="0">
                         <property name="bitmap">Load From File; ../icons/saveprj1.xpm</property>
                         <property name="checked">0</property>
                         <property name="enabled">1</property>
@@ -184,11 +184,11 @@
                         <event name="OnMenuSelection">OnSaveState</event>
                         <event name="OnUpdateUI"></event>
                     </object>
-                    <object class="separator" expanded="1">
+                    <object class="separator" expanded="0">
                         <property name="name">m_separator2</property>
                         <property name="permission">none</property>
                     </object>
-                    <object class="wxMenuItem" expanded="1">
+                    <object class="wxMenuItem" expanded="0">
                         <property name="bitmap">Load From File; ../icons/close.xpm</property>
                         <property name="checked">0</property>
                         <property name="enabled">1</property>
@@ -204,11 +204,11 @@
                         <event name="OnUpdateUI"></event>
                     </object>
                 </object>
-                <object class="wxMenu" expanded="1">
+                <object class="wxMenu" expanded="0">
                     <property name="label">&amp;Import/Export</property>
                     <property name="name">editMenu</property>
                     <property name="permission">protected</property>
-                    <object class="wxMenuItem" expanded="1">
+                    <object class="wxMenuItem" expanded="0">
                         <property name="bitmap">Load From File; ../icons/bmpin1.xpm</property>
                         <property name="checked">0</property>
                         <property name="enabled">1</property>
@@ -223,7 +223,7 @@
                         <event name="OnMenuSelection">OnImportBMP</event>
                         <event name="OnUpdateUI"></event>
                     </object>
-                    <object class="wxMenuItem" expanded="1">
+                    <object class="wxMenuItem" expanded="0">
                         <property name="bitmap">Load From File; ../icons/bmpout1.xpm</property>
                         <property name="checked">0</property>
                         <property name="enabled">1</property>
@@ -238,11 +238,11 @@
                         <event name="OnMenuSelection">OnExportBMP</event>
                         <event name="OnUpdateUI"></event>
                     </object>
-                    <object class="separator" expanded="1">
+                    <object class="separator" expanded="0">
                         <property name="name">m_separator3</property>
                         <property name="permission">none</property>
                     </object>
-                    <object class="wxMenuItem" expanded="1">
+                    <object class="wxMenuItem" expanded="0">
                         <property name="bitmap">Load From File; ../icons/exportraw.xpm</property>
                         <property name="checked">0</property>
                         <property name="enabled">1</property>
@@ -257,11 +257,11 @@
                         <event name="OnMenuSelection">OnExportRAW</event>
                         <event name="OnUpdateUI"></event>
                     </object>
-                    <object class="separator" expanded="1">
+                    <object class="separator" expanded="0">
                         <property name="name">m_separator4</property>
                         <property name="permission">none</property>
                     </object>
-                    <object class="wxMenuItem" expanded="1">
+                    <object class="wxMenuItem" expanded="0">
                         <property name="bitmap">Load From File; ../icons/settings.xpm</property>
                         <property name="checked">0</property>
                         <property name="enabled">1</property>
@@ -277,11 +277,11 @@
                         <event name="OnUpdateUI"></event>
                     </object>
                 </object>
-                <object class="wxMenu" expanded="1">
+                <object class="wxMenu" expanded="0">
                     <property name="label">&amp;Palette</property>
                     <property name="name">palMenu</property>
                     <property name="permission">protected</property>
-                    <object class="wxMenuItem" expanded="1">
+                    <object class="wxMenuItem" expanded="0">
                         <property name="bitmap">Load From File; ../icons/custompal1.xpm</property>
                         <property name="checked">0</property>
                         <property name="enabled">1</property>
@@ -297,11 +297,11 @@
                         <event name="OnUpdateUI"></event>
                     </object>
                 </object>
-                <object class="wxMenu" expanded="1">
+                <object class="wxMenu" expanded="0">
                     <property name="label">&amp;Help</property>
                     <property name="name">helpMenu</property>
                     <property name="permission">protected</property>
-                    <object class="wxMenuItem" expanded="1">
+                    <object class="wxMenuItem" expanded="0">
                         <property name="bitmap">Load From File; ../icons/about.xpm</property>
                         <property name="checked">0</property>
                         <property name="enabled">1</property>
@@ -1773,7 +1773,7 @@
                                                     <property name="gripper">0</property>
                                                     <property name="hidden">0</property>
                                                     <property name="id">wxID_WIDTH_SLIDER</property>
-                                                    <property name="maxValue">4096</property>
+                                                    <property name="maxValue">7680</property>
                                                     <property name="max_size"></property>
                                                     <property name="maximize_button">0</property>
                                                     <property name="maximum_size"></property>
@@ -1882,7 +1882,7 @@
                                                     <property name="hidden">0</property>
                                                     <property name="id">wxID_WIDTH_CTRL</property>
                                                     <property name="initial">8</property>
-                                                    <property name="max">4096</property>
+                                                    <property name="max">7680</property>
                                                     <property name="max_size"></property>
                                                     <property name="maximize_button">0</property>
                                                     <property name="maximum_size"></property>
@@ -2132,7 +2132,7 @@
                                                     <property name="gripper">0</property>
                                                     <property name="hidden">0</property>
                                                     <property name="id">wxID_HEIGHT_SLIDER</property>
-                                                    <property name="maxValue">4096</property>
+                                                    <property name="maxValue">4320</property>
                                                     <property name="max_size"></property>
                                                     <property name="maximize_button">0</property>
                                                     <property name="maximum_size"></property>
@@ -2241,7 +2241,7 @@
                                                     <property name="hidden">0</property>
                                                     <property name="id">wxID_HEIGHT_CTRL</property>
                                                     <property name="initial">8</property>
-                                                    <property name="max">4096</property>
+                                                    <property name="max">4320</property>
                                                     <property name="max_size"></property>
                                                     <property name="maximize_button">0</property>
                                                     <property name="maximum_size"></property>

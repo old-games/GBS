@@ -223,10 +223,10 @@ GUIFrame::GUIFrame( wxWindow* parent, wxWindowID id, const wxString& title, cons
 	m_staticText3->Wrap( -1 );
 	sbSizer1->Add( m_staticText3, 0, wxALL, 5 );
 	
-	widthSlider = new wxSlider( m_panel1, wxID_WIDTH_SLIDER, 8, 1, 4096, wxDefaultPosition, wxDefaultSize, wxSL_HORIZONTAL );
+	widthSlider = new wxSlider( m_panel1, wxID_WIDTH_SLIDER, 8, 1, 7680, wxDefaultPosition, wxDefaultSize, wxSL_HORIZONTAL );
 	sbSizer1->Add( widthSlider, 0, wxALIGN_CENTER_HORIZONTAL|wxTOP|wxBOTTOM|wxEXPAND, 5 );
 	
-	widthCtrl = new wxSpinCtrl( m_panel1, wxID_WIDTH_CTRL, wxEmptyString, wxDefaultPosition, wxDefaultSize, wxSP_ARROW_KEYS, 1, 4096, 8 );
+	widthCtrl = new wxSpinCtrl( m_panel1, wxID_WIDTH_CTRL, wxEmptyString, wxDefaultPosition, wxDefaultSize, wxSP_ARROW_KEYS, 1, 7680, 8 );
 	sbSizer1->Add( widthCtrl, 0, wxTOP|wxBOTTOM|wxALIGN_CENTER_HORIZONTAL|wxEXPAND, 5 );
 	
 	m_staticline3 = new wxStaticLine( m_panel1, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxLI_HORIZONTAL );
@@ -236,10 +236,10 @@ GUIFrame::GUIFrame( wxWindow* parent, wxWindowID id, const wxString& title, cons
 	m_staticText4->Wrap( -1 );
 	sbSizer1->Add( m_staticText4, 0, wxALL, 5 );
 	
-	heightSlider = new wxSlider( m_panel1, wxID_HEIGHT_SLIDER, 8, 1, 4096, wxDefaultPosition, wxDefaultSize, wxSL_HORIZONTAL );
+	heightSlider = new wxSlider( m_panel1, wxID_HEIGHT_SLIDER, 8, 1, 4320, wxDefaultPosition, wxDefaultSize, wxSL_HORIZONTAL );
 	sbSizer1->Add( heightSlider, 0, wxALIGN_CENTER_HORIZONTAL|wxTOP|wxBOTTOM|wxEXPAND, 5 );
 	
-	heightCtrl = new wxSpinCtrl( m_panel1, wxID_HEIGHT_CTRL, wxT("8"), wxDefaultPosition, wxDefaultSize, wxSP_ARROW_KEYS, 1, 4096, 8 );
+	heightCtrl = new wxSpinCtrl( m_panel1, wxID_HEIGHT_CTRL, wxT("8"), wxDefaultPosition, wxDefaultSize, wxSP_ARROW_KEYS, 1, 4320, 8 );
 	sbSizer1->Add( heightCtrl, 0, wxALIGN_CENTER_HORIZONTAL|wxTOP|wxBOTTOM|wxEXPAND, 5 );
 	
 	
