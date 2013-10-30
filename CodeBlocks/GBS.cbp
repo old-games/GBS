@@ -14,10 +14,10 @@
 				<Option projectLinkerOptionsRelation="2" />
 				<Compiler>
 					<Add option="-g" />
-					<Add option="`wx-config  --version=2.9 --static=yes --unicode=yes --debug=yes --cflags`" />
+					<Add option="`wx-config  --cflags`" />
 				</Compiler>
 				<Linker>
-					<Add option="`wx-config  --version=2.9 --static=yes --unicode=yes --debug=yes --libs`" />
+					<Add option="`wx-config  --libs`" />
 				</Linker>
 			</Target>
 			<Target title="Release">
@@ -28,11 +28,11 @@
 				<Option projectLinkerOptionsRelation="2" />
 				<Compiler>
 					<Add option="-O2" />
-					<Add option="`wx-config  --version=2.9 --static=yes --unicode=yes --debug=no --cflags`" />
+					<Add option="`wx-config  --cflags`" />
 				</Compiler>
 				<Linker>
 					<Add option="-s" />
-					<Add option="`wx-config  --version=2.9 --static=yes --unicode=yes --debug=no --libs`" />
+					<Add option="`wx-config  --libs`" />
 				</Linker>
 			</Target>
 		</Build>
@@ -70,6 +70,7 @@
 		<Extensions>
 			<code_completion />
 			<debugger />
+			<envvars />
 		</Extensions>
 	</Project>
 </CodeBlocks_project_file>
