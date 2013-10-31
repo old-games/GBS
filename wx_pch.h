@@ -23,6 +23,7 @@
 
 #ifdef WX_PRECOMP
     // put here all your rarely-changing header files
+    #include <wx/app.h>
 	#include <wx/splash.h>
     #include <wx/file.h>
 	#include <wx/textfile.h>
@@ -31,12 +32,15 @@
 	#include <wx/msgdlg.h>
     #include <wx/utils.h>
 	#include <wx/dcmemory.h>
+	#include <wx/stdpaths.h>
+	#include <wx/platinfo.h>
+	#include <wx/cmdline.h>
 	#include "splash.xpm"
 #endif // WX_PRECOMP
 
-typedef unsigned char	uchar;
+typedef unsigned char		uchar;
 typedef unsigned short	ushort;
-typedef unsigned int	uint;
+typedef unsigned int		uint;
 
 #ifdef __VISUALC__
 

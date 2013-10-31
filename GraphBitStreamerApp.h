@@ -14,12 +14,14 @@
 
 class GraphBitStreamerApp : public wxApp
 {
-    public:
-        virtual bool OnInit();
-        //
-        int FilterEvent(wxEvent& event);
-        //
-        wxFrame* mFrame;
+	public:
+		virtual bool OnInit();
+	private:
+
+		int FilterEvent(wxEvent& event);
+		//
+		wxFrame*		mFrame;
+		wxArrayString	mFiles;
 };
 
 #endif // GRAPHBITSTREAMERAPP_H

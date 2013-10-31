@@ -5,14 +5,25 @@
 
 class SettingsDlg: public SettingsDialog
 {
-    public:
-        SettingsDlg(wxWindow* parent);
-        int getRAWBits();
-        int getBMPBits();
-        void SaveState(wxFile* tmp);
-        void LoadState(wxFile* tmp);
-        virtual int ShowModal();
-        ~SettingsDlg();
+	public:
+		SettingsDlg(wxWindow* parent);
+		int getRAWBits();
+		int getBMPBits();
+		bool isAutoSave();
+		void SaveState(wxFile* tmp);
+		void LoadState(wxFile* tmp);
+		virtual int ShowModal();
+		~SettingsDlg();
+
+//	static wxString GetSettingsPath();
+//	static void LoadSettings();
+//	static void SaveSettings();
+//
+//	static bool IsAutoSave() { return AutoSave; }
+//private:
+//	static int RawBits;
+//	static int BMPBits;
+//	static bool AutoSave;
 };
 
 

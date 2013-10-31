@@ -14,11 +14,18 @@
 
 IMPLEMENT_APP(GraphBitStreamerApp);
 
+static const wxCmdLineEntryDesc cmdLineDesc[] =
+{
+    { wxCMD_LINE_PARAM,  NULL, NULL, "input file", wxCMD_LINE_VAL_STRING, wxCMD_LINE_PARAM_MULTIPLE },
+    { wxCMD_LINE_NONE }
+};
+
+
 bool GraphBitStreamerApp::OnInit()
 {
 	check_types();
-    GraphBitStreamerFrame* frame = new GraphBitStreamerFrame(0L);
-    mFrame = frame;
+	GraphBitStreamerFrame* frame = new GraphBitStreamerFrame(0L);
+	mFrame = frame;
 #ifndef __WXMSW__
 	frame->SetIcon(wxICON(GBS0)); // To Set App Icon
 #else
@@ -27,18 +34,29 @@ bool GraphBitStreamerApp::OnInit()
 	icons.AddIcon(wxICON(wxSTD_FRAME));
 	frame->SetIcons(icons);
 #endif
-    frame->Show();
-    return true;
+	frame->Show();
+	SetTopWindow(frame);
+
+	if (wxApp::argc > 1)
+	{
+		wxString fname(wxApp::argv[1]);
+		wxLogDebug("argv[1]: %s", fname);
+		frame->LoadFromCmdLine(fname);
+	}
+
+	return true;
 }
+
+
 
 int GraphBitStreamerApp::FilterEvent(wxEvent& event)
 {
-            GraphBitStreamerFrame* frame = (GraphBitStreamerFrame*) mFrame;
-            if ( event.GetEventType()==wxEVT_KEY_UP && frame )
-                {
-                    wxKeyEvent ev = (wxKeyEvent&) event;
-                        frame->OnKeyDown( ev );
-                }
-            return -1;
+			GraphBitStreamerFrame* frame = (GraphBitStreamerFrame*) mFrame;
+			if ( event.GetEventType()==wxEVT_KEY_UP && frame )
+				{
+					wxKeyEvent ev = (wxKeyEvent&) event;
+						frame->OnKeyDown( ev );
+				}
+			return -1;
 }
 

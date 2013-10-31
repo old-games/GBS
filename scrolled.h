@@ -17,16 +17,8 @@ private:
     bool mInvertGrid;
 
 public:
-    ScrolledImageComponent(wxWindow* parent, wxWindowID id, wxBitmap *bmp = NULL, int w = 0, int h = 0) : wxScrolledWindow(parent, id)
-    {
-        scale = 1;
-        grid = false;
-        setBitmap(bmp, w, h);
-        //SetSize(0, 0, 640, 480);
-        SetCorrXY(0, 0);
-        mShowCorr = false;
-        mInvertGrid = false;
-    }
+    ScrolledImageComponent(wxWindow* parent, wxWindowID id, wxBitmap *bmp = NULL, int w = 0, int h = 0);
+
 
     void setOnlyBitmap(wxBitmap *bmp)
     {

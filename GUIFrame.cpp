@@ -144,7 +144,7 @@ GUIFrame::GUIFrame( wxWindow* parent, wxWindowID id, const wxString& title, cons
 	
 	this->SetMenuBar( mbar );
 	
-	statusBar = this->CreateStatusBar( 2, wxST_SIZEGRIP, wxID_ANY );
+	statusBar = this->CreateStatusBar( 3, wxST_SIZEGRIP, wxID_ANY );
 	wxGridSizer* gSizer1;
 	gSizer1 = new wxGridSizer( 1, 1, 0, 0 );
 	
@@ -161,6 +161,15 @@ GUIFrame::GUIFrame( wxWindow* parent, wxWindowID id, const wxString& title, cons
 	
 	wxStaticBoxSizer* sbSizer1;
 	sbSizer1 = new wxStaticBoxSizer( new wxStaticBox( m_panel1, wxID_ANY, _("Controls:") ), wxVERTICAL );
+	
+	m_staticText7 = new wxStaticText( m_panel1, wxID_ANY, _("Data mode:"), wxDefaultPosition, wxDefaultSize, 0 );
+	m_staticText7->Wrap( -1 );
+	sbSizer1->Add( m_staticText7, 0, wxALL, 5 );
+	
+	wxArrayString mDataModeChoiceChoices;
+	mDataModeChoice = new wxChoice( m_panel1, wxID_DATA_MODE_CHOICE, wxDefaultPosition, wxDefaultSize, mDataModeChoiceChoices, 0 );
+	mDataModeChoice->SetSelection( 0 );
+	sbSizer1->Add( mDataModeChoice, 0, wxEXPAND, 5 );
 	
 	m_staticText1 = new wxStaticText( m_panel1, wxID_ANY, _("Bits per pixel:"), wxDefaultPosition, wxDefaultSize, 0 );
 	m_staticText1->Wrap( -1 );
@@ -219,9 +228,23 @@ GUIFrame::GUIFrame( wxWindow* parent, wxWindowID id, const wxString& title, cons
 	m_staticline2 = new wxStaticLine( m_panel1, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxLI_HORIZONTAL );
 	sbSizer1->Add( m_staticline2, 0, wxEXPAND | wxALL, 5 );
 	
+	wxFlexGridSizer* fgSizer2;
+	fgSizer2 = new wxFlexGridSizer( 1, 2, 0, 0 );
+	fgSizer2->AddGrowableCol( 1 );
+	fgSizer2->SetFlexibleDirection( wxBOTH );
+	fgSizer2->SetNonFlexibleGrowMode( wxFLEX_GROWMODE_SPECIFIED );
+	
 	m_staticText3 = new wxStaticText( m_panel1, wxID_ANY, _("Width:"), wxDefaultPosition, wxDefaultSize, 0 );
 	m_staticText3->Wrap( -1 );
-	sbSizer1->Add( m_staticText3, 0, wxALL, 5 );
+	fgSizer2->Add( m_staticText3, 0, wxALL, 5 );
+	
+	wxArrayString mWidthChoiceChoices;
+	mWidthChoice = new wxChoice( m_panel1, wxID_WIDTH_CHOICE, wxDefaultPosition, wxDefaultSize, mWidthChoiceChoices, 0 );
+	mWidthChoice->SetSelection( 0 );
+	fgSizer2->Add( mWidthChoice, 0, wxRIGHT|wxLEFT|wxEXPAND, 5 );
+	
+	
+	sbSizer1->Add( fgSizer2, 0, wxEXPAND, 5 );
 	
 	widthSlider = new wxSlider( m_panel1, wxID_WIDTH_SLIDER, 8, 1, 7680, wxDefaultPosition, wxDefaultSize, wxSL_HORIZONTAL );
 	sbSizer1->Add( widthSlider, 0, wxALIGN_CENTER_HORIZONTAL|wxTOP|wxBOTTOM|wxEXPAND, 5 );
@@ -232,9 +255,23 @@ GUIFrame::GUIFrame( wxWindow* parent, wxWindowID id, const wxString& title, cons
 	m_staticline3 = new wxStaticLine( m_panel1, wxID_ANY, wxDefaultPosition, wxDefaultSize, wxLI_HORIZONTAL );
 	sbSizer1->Add( m_staticline3, 0, wxEXPAND | wxALL, 5 );
 	
+	wxFlexGridSizer* fgSizer21;
+	fgSizer21 = new wxFlexGridSizer( 1, 2, 0, 0 );
+	fgSizer21->AddGrowableCol( 1 );
+	fgSizer21->SetFlexibleDirection( wxBOTH );
+	fgSizer21->SetNonFlexibleGrowMode( wxFLEX_GROWMODE_SPECIFIED );
+	
 	m_staticText4 = new wxStaticText( m_panel1, wxID_ANY, _("Height:"), wxDefaultPosition, wxDefaultSize, 0 );
 	m_staticText4->Wrap( -1 );
-	sbSizer1->Add( m_staticText4, 0, wxALL, 5 );
+	fgSizer21->Add( m_staticText4, 0, wxALL, 5 );
+	
+	wxArrayString mHeightChoiceChoices;
+	mHeightChoice = new wxChoice( m_panel1, wxID_HEIGHT_CHOICE, wxDefaultPosition, wxDefaultSize, mHeightChoiceChoices, 0 );
+	mHeightChoice->SetSelection( 0 );
+	fgSizer21->Add( mHeightChoice, 0, wxRIGHT|wxLEFT|wxEXPAND, 5 );
+	
+	
+	sbSizer1->Add( fgSizer21, 0, wxEXPAND, 5 );
 	
 	heightSlider = new wxSlider( m_panel1, wxID_HEIGHT_SLIDER, 8, 1, 4320, wxDefaultPosition, wxDefaultSize, wxSL_HORIZONTAL );
 	sbSizer1->Add( heightSlider, 0, wxALIGN_CENTER_HORIZONTAL|wxTOP|wxBOTTOM|wxEXPAND, 5 );
@@ -376,6 +413,7 @@ GUIFrame::GUIFrame( wxWindow* parent, wxWindowID id, const wxString& title, cons
 	this->Connect( menuPaletteLoad->GetId(), wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( GUIFrame::OnMenuPalLoad ) );
 	this->Connect( menuHelpAbout->GetId(), wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( GUIFrame::OnAbout ) );
 	m_panel1->Connect( wxEVT_PAINT, wxPaintEventHandler( GUIFrame::OnPaint ), NULL, this );
+	mDataModeChoice->Connect( wxEVT_COMMAND_CHOICE_SELECTED, wxCommandEventHandler( GUIFrame::DataModeChanged ), NULL, this );
 	bitSlider->Connect( wxEVT_SCROLL_TOP, wxScrollEventHandler( GUIFrame::OnScrollChanged ), NULL, this );
 	bitSlider->Connect( wxEVT_SCROLL_BOTTOM, wxScrollEventHandler( GUIFrame::OnScrollChanged ), NULL, this );
 	bitSlider->Connect( wxEVT_SCROLL_LINEUP, wxScrollEventHandler( GUIFrame::OnScrollChanged ), NULL, this );
@@ -403,6 +441,7 @@ GUIFrame::GUIFrame( wxWindow* parent, wxWindowID id, const wxString& title, cons
 	lineRightBtn->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( GUIFrame::OnNextLine ), NULL, this );
 	pageRigthBtn->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( GUIFrame::OnNextFrame ), NULL, this );
 	jumpBtn->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( GUIFrame::OnJumpBtn ), NULL, this );
+	mWidthChoice->Connect( wxEVT_COMMAND_CHOICE_SELECTED, wxCommandEventHandler( GUIFrame::OnSizeChoice ), NULL, this );
 	widthSlider->Connect( wxEVT_SCROLL_TOP, wxScrollEventHandler( GUIFrame::OnScrollChanged ), NULL, this );
 	widthSlider->Connect( wxEVT_SCROLL_BOTTOM, wxScrollEventHandler( GUIFrame::OnScrollChanged ), NULL, this );
 	widthSlider->Connect( wxEVT_SCROLL_LINEUP, wxScrollEventHandler( GUIFrame::OnScrollChanged ), NULL, this );
@@ -414,6 +453,7 @@ GUIFrame::GUIFrame( wxWindow* parent, wxWindowID id, const wxString& title, cons
 	widthSlider->Connect( wxEVT_SCROLL_CHANGED, wxScrollEventHandler( GUIFrame::OnScrollChanged ), NULL, this );
 	widthCtrl->Connect( wxEVT_KEY_UP, wxKeyEventHandler( GUIFrame::OnKeyUp ), NULL, this );
 	widthCtrl->Connect( wxEVT_COMMAND_SPINCTRL_UPDATED, wxSpinEventHandler( GUIFrame::OnSpinStrl ), NULL, this );
+	mHeightChoice->Connect( wxEVT_COMMAND_CHOICE_SELECTED, wxCommandEventHandler( GUIFrame::OnSizeChoice ), NULL, this );
 	heightSlider->Connect( wxEVT_SCROLL_TOP, wxScrollEventHandler( GUIFrame::OnScrollChanged ), NULL, this );
 	heightSlider->Connect( wxEVT_SCROLL_BOTTOM, wxScrollEventHandler( GUIFrame::OnScrollChanged ), NULL, this );
 	heightSlider->Connect( wxEVT_SCROLL_LINEUP, wxScrollEventHandler( GUIFrame::OnScrollChanged ), NULL, this );
@@ -438,7 +478,7 @@ GUIFrame::GUIFrame( wxWindow* parent, wxWindowID id, const wxString& title, cons
 	zoomCtrl->Connect( wxEVT_COMMAND_SPINCTRL_UPDATED, wxSpinEventHandler( GUIFrame::OnSpinStrl ), NULL, this );
 	gridCheck->Connect( wxEVT_COMMAND_CHECKBOX_CLICKED, wxCommandEventHandler( GUIFrame::OnGridCheck ), NULL, this );
 	gridInvert->Connect( wxEVT_COMMAND_CHECKBOX_CLICKED, wxCommandEventHandler( GUIFrame::OnInvertChange ), NULL, this );
-	palChoice->Connect( wxEVT_COMMAND_CHOICE_SELECTED, wxCommandEventHandler( GUIFrame::PalChanged ), NULL, this );
+	palChoice->Connect( wxEVT_COMMAND_CHOICE_SELECTED, wxCommandEventHandler( GUIFrame::OnPalChanged ), NULL, this );
 	CGACheck->Connect( wxEVT_COMMAND_CHECKBOX_CLICKED, wxCommandEventHandler( GUIFrame::PalChanged ), NULL, this );
 	palBitmap->Connect( wxEVT_LEFT_UP, wxMouseEventHandler( GUIFrame::OnPaletteClick ), NULL, this );
 	saveBtn->Connect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( GUIFrame::SaveChanges ), NULL, this );
@@ -470,6 +510,7 @@ GUIFrame::~GUIFrame()
 	this->Disconnect( idLoadPlatte, wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( GUIFrame::OnMenuPalLoad ) );
 	this->Disconnect( idMenuAbout, wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( GUIFrame::OnAbout ) );
 	m_panel1->Disconnect( wxEVT_PAINT, wxPaintEventHandler( GUIFrame::OnPaint ), NULL, this );
+	mDataModeChoice->Disconnect( wxEVT_COMMAND_CHOICE_SELECTED, wxCommandEventHandler( GUIFrame::DataModeChanged ), NULL, this );
 	bitSlider->Disconnect( wxEVT_SCROLL_TOP, wxScrollEventHandler( GUIFrame::OnScrollChanged ), NULL, this );
 	bitSlider->Disconnect( wxEVT_SCROLL_BOTTOM, wxScrollEventHandler( GUIFrame::OnScrollChanged ), NULL, this );
 	bitSlider->Disconnect( wxEVT_SCROLL_LINEUP, wxScrollEventHandler( GUIFrame::OnScrollChanged ), NULL, this );
@@ -497,6 +538,7 @@ GUIFrame::~GUIFrame()
 	lineRightBtn->Disconnect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( GUIFrame::OnNextLine ), NULL, this );
 	pageRigthBtn->Disconnect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( GUIFrame::OnNextFrame ), NULL, this );
 	jumpBtn->Disconnect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( GUIFrame::OnJumpBtn ), NULL, this );
+	mWidthChoice->Disconnect( wxEVT_COMMAND_CHOICE_SELECTED, wxCommandEventHandler( GUIFrame::OnSizeChoice ), NULL, this );
 	widthSlider->Disconnect( wxEVT_SCROLL_TOP, wxScrollEventHandler( GUIFrame::OnScrollChanged ), NULL, this );
 	widthSlider->Disconnect( wxEVT_SCROLL_BOTTOM, wxScrollEventHandler( GUIFrame::OnScrollChanged ), NULL, this );
 	widthSlider->Disconnect( wxEVT_SCROLL_LINEUP, wxScrollEventHandler( GUIFrame::OnScrollChanged ), NULL, this );
@@ -508,6 +550,7 @@ GUIFrame::~GUIFrame()
 	widthSlider->Disconnect( wxEVT_SCROLL_CHANGED, wxScrollEventHandler( GUIFrame::OnScrollChanged ), NULL, this );
 	widthCtrl->Disconnect( wxEVT_KEY_UP, wxKeyEventHandler( GUIFrame::OnKeyUp ), NULL, this );
 	widthCtrl->Disconnect( wxEVT_COMMAND_SPINCTRL_UPDATED, wxSpinEventHandler( GUIFrame::OnSpinStrl ), NULL, this );
+	mHeightChoice->Disconnect( wxEVT_COMMAND_CHOICE_SELECTED, wxCommandEventHandler( GUIFrame::OnSizeChoice ), NULL, this );
 	heightSlider->Disconnect( wxEVT_SCROLL_TOP, wxScrollEventHandler( GUIFrame::OnScrollChanged ), NULL, this );
 	heightSlider->Disconnect( wxEVT_SCROLL_BOTTOM, wxScrollEventHandler( GUIFrame::OnScrollChanged ), NULL, this );
 	heightSlider->Disconnect( wxEVT_SCROLL_LINEUP, wxScrollEventHandler( GUIFrame::OnScrollChanged ), NULL, this );
@@ -532,7 +575,7 @@ GUIFrame::~GUIFrame()
 	zoomCtrl->Disconnect( wxEVT_COMMAND_SPINCTRL_UPDATED, wxSpinEventHandler( GUIFrame::OnSpinStrl ), NULL, this );
 	gridCheck->Disconnect( wxEVT_COMMAND_CHECKBOX_CLICKED, wxCommandEventHandler( GUIFrame::OnGridCheck ), NULL, this );
 	gridInvert->Disconnect( wxEVT_COMMAND_CHECKBOX_CLICKED, wxCommandEventHandler( GUIFrame::OnInvertChange ), NULL, this );
-	palChoice->Disconnect( wxEVT_COMMAND_CHOICE_SELECTED, wxCommandEventHandler( GUIFrame::PalChanged ), NULL, this );
+	palChoice->Disconnect( wxEVT_COMMAND_CHOICE_SELECTED, wxCommandEventHandler( GUIFrame::OnPalChanged ), NULL, this );
 	CGACheck->Disconnect( wxEVT_COMMAND_CHECKBOX_CLICKED, wxCommandEventHandler( GUIFrame::PalChanged ), NULL, this );
 	palBitmap->Disconnect( wxEVT_LEFT_UP, wxMouseEventHandler( GUIFrame::OnPaletteClick ), NULL, this );
 	saveBtn->Disconnect( wxEVT_COMMAND_BUTTON_CLICKED, wxCommandEventHandler( GUIFrame::SaveChanges ), NULL, this );

@@ -21,15 +21,15 @@
 #define LIGHT 8
 #define CGA_PALS 3
 
-#define CGA1 0
-#define CGA2 1
-#define CGA3 2
-#define EGA 3
-#define VGA 4
-#define GREY1 5
-#define GREY2 6
-#define TRUECOLOR 7
-#define CUSTOM 8
+//#define CGA1 0
+//#define CGA2 1
+//#define CGA3 2
+//#define EGA 3
+//#define VGA 4
+//#define GREY1 5
+//#define GREY2 6
+//#define TRUECOLOR 7
+//#define CUSTOM 8
 
 #define COUNTER_CLOCKWISE 1
 #define CLOCKWISE -1
@@ -43,6 +43,7 @@
 #include "hexnum.h"
 #include "settings.h"
 #include <wx/dcclient.h>
+#include "datamode.h"
 
 static const unsigned char CGAPAL [CGA_PALS][4] =
 {
@@ -67,9 +68,12 @@ class GraphBitStreamerFrame: public GUIFrame
         GraphBitStreamerFrame(wxFrame *frame);
         ~GraphBitStreamerFrame();
         virtual void OnKeyDown( wxKeyEvent& event );
+		bool LoadFromCmdLine(const wxString& path);
 
     private:
-        // переменные
+
+        DataProcessor	mDataProcessor;
+        DataMode::Mode	mDataMode;
         wxClientDC *dc;
         ScrolledImageComponent* mImage;
         wxFile mFile;
@@ -80,7 +84,7 @@ class GraphBitStreamerFrame: public GUIFrame
         unsigned int mBitByteSize;
         unsigned int mTotalBits;    // всего бит в файле
         unsigned int mUnpackedSize;
-        unsigned long long *mUnpacked;
+        DataBuffer*    mUnpacked;
         unsigned char red[256], green[256], blue[256];
         unsigned char mVgaPal[768];
         unsigned char* mCustomPal;
@@ -99,7 +103,7 @@ class GraphBitStreamerFrame: public GUIFrame
         SettingsDlg *mSettings;
         // функции
         void          pack();
-        void          unpack();
+        void          unpack(uint bitPos, uchar bitCount);
         void          updateControls(bool reaload = true);
         void          SetStandardPal();
         void          SetGreyPal(int step);
@@ -109,9 +113,19 @@ class GraphBitStreamerFrame: public GUIFrame
         wxSlider*     getSliderById(int id);
         wxSpinCtrl*   getSliderTextBox(int id);
         void          TurnControls(bool b);
-        bool          OpenMainFile(wxString name);
+        bool          OpenMainFile(wxString name, bool findIfLost);
         void          StorePos(int pos);
         void          RestorePos(int pos);
+        void          PalChanged(bool redraw = true);
+        void          PalLoad();
+        bool          IsEGASpecialMode() const;
+		void          FillSizeChoice(wxChoice* choice);
+		void          SetStandardSize(bool width, int size);
+		bool          LoadProject(const wxString& path);
+		bool          SaveProject(const wxString& path);
+		wxString      SelectFile(bool project);
+
+		virtual void OnSizeChoice( wxCommandEvent& event );
         virtual void OnClose(wxCloseEvent& event);
         virtual void OnQuit(wxCommandEvent& event);
         virtual void OnAbout(wxCommandEvent& event);
@@ -121,7 +135,7 @@ class GraphBitStreamerFrame: public GUIFrame
 		virtual void OnPaint( wxPaintEvent& event );
 		virtual void OnGridCheck( wxCommandEvent& event );
         virtual void OnMenuPalLoad( wxCommandEvent& event );
-		virtual void PalChanged( wxCommandEvent& event );
+		virtual void OnPalChanged( wxCommandEvent& event );
         virtual void OnOutputLeftClick( wxMouseEvent& event );
         virtual void OnOutputMotion( wxMouseEvent& event );
         virtual void OnOutputRightClick( wxMouseEvent& event );
@@ -144,7 +158,9 @@ class GraphBitStreamerFrame: public GUIFrame
 		virtual void OnRotateRight( wxCommandEvent& event );
 		virtual void OnSettingsMenu( wxCommandEvent& event );
 		virtual void OnExportRAW( wxCommandEvent& event );
+		virtual void DataModeChanged( wxCommandEvent& event );
 
+		void FillModeChoice();
         bool Quit();
 
         void Rotate(int step);

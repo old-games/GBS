@@ -22,6 +22,7 @@
 #include <wx/settings.h>
 #include <wx/statusbr.h>
 #include <wx/stattext.h>
+#include <wx/choice.h>
 #include <wx/slider.h>
 #include <wx/spinctrl.h>
 #include <wx/statline.h>
@@ -29,7 +30,6 @@
 #include <wx/sizer.h>
 #include <wx/statbox.h>
 #include <wx/checkbox.h>
-#include <wx/choice.h>
 #include <wx/statbmp.h>
 #include <wx/panel.h>
 #include <wx/toolbar.h>
@@ -48,19 +48,22 @@
 #define idLoadPlatte 1008
 #define idMenuAbout 1009
 #define wxID_ANY_PANEL 1010
-#define wxID_BITS_SLIDER 1011
-#define wxID_BITS_CTRL 1012
-#define wxID_START_SLIDER 1013
-#define wxID_START_CTRL 1014
-#define wxID_WIDTH_SLIDER 1015
-#define wxID_WIDTH_CTRL 1016
-#define wxID_HEIGHT_SLIDER 1017
-#define wxID_HEIGHT_CTRL 1018
-#define wxID_ZOOM_SLIDER 1019
-#define wxID_ZOOM_CTRL 1020
-#define idFlipImage 1021
-#define idRotateLeft 1022
-#define idRotateRight 1023
+#define wxID_DATA_MODE_CHOICE 1011
+#define wxID_BITS_SLIDER 1012
+#define wxID_BITS_CTRL 1013
+#define wxID_START_SLIDER 1014
+#define wxID_START_CTRL 1015
+#define wxID_WIDTH_CHOICE 1016
+#define wxID_WIDTH_SLIDER 1017
+#define wxID_WIDTH_CTRL 1018
+#define wxID_HEIGHT_CHOICE 1019
+#define wxID_HEIGHT_SLIDER 1020
+#define wxID_HEIGHT_CTRL 1021
+#define wxID_ZOOM_SLIDER 1022
+#define wxID_ZOOM_CTRL 1023
+#define idFlipImage 1024
+#define idRotateLeft 1025
+#define idRotateRight 1026
 
 ///////////////////////////////////////////////////////////////////////////////
 /// Class GUIFrame
@@ -81,6 +84,8 @@ class GUIFrame : public wxFrame
 		wxMenu* helpMenu;
 		wxStatusBar* statusBar;
 		wxPanel* m_panel1;
+		wxStaticText* m_staticText7;
+		wxChoice* mDataModeChoice;
 		wxStaticText* m_staticText1;
 		wxSlider* bitSlider;
 		wxSpinCtrl* bitsCtrl;
@@ -95,10 +100,12 @@ class GUIFrame : public wxFrame
 		wxButton* jumpBtn;
 		wxStaticLine* m_staticline2;
 		wxStaticText* m_staticText3;
+		wxChoice* mWidthChoice;
 		wxSlider* widthSlider;
 		wxSpinCtrl* widthCtrl;
 		wxStaticLine* m_staticline3;
 		wxStaticText* m_staticText4;
+		wxChoice* mHeightChoice;
 		wxSlider* heightSlider;
 		wxSpinCtrl* heightCtrl;
 		wxStaticText* m_staticText5;
@@ -131,6 +138,7 @@ class GUIFrame : public wxFrame
 		virtual void OnSettingsMenu( wxCommandEvent& event ) { event.Skip(); }
 		virtual void OnMenuPalLoad( wxCommandEvent& event ) { event.Skip(); }
 		virtual void OnAbout( wxCommandEvent& event ) { event.Skip(); }
+		virtual void DataModeChanged( wxCommandEvent& event ) { event.Skip(); }
 		virtual void OnScrollChanged( wxScrollEvent& event ) { event.Skip(); }
 		virtual void OnKeyUp( wxKeyEvent& event ) { event.Skip(); }
 		virtual void OnSpinStrl( wxSpinEvent& event ) { event.Skip(); }
@@ -139,8 +147,10 @@ class GUIFrame : public wxFrame
 		virtual void OnNextLine( wxCommandEvent& event ) { event.Skip(); }
 		virtual void OnNextFrame( wxCommandEvent& event ) { event.Skip(); }
 		virtual void OnJumpBtn( wxCommandEvent& event ) { event.Skip(); }
+		virtual void OnSizeChoice( wxCommandEvent& event ) { event.Skip(); }
 		virtual void OnGridCheck( wxCommandEvent& event ) { event.Skip(); }
 		virtual void OnInvertChange( wxCommandEvent& event ) { event.Skip(); }
+		virtual void OnPalChanged( wxCommandEvent& event ) { event.Skip(); }
 		virtual void PalChanged( wxCommandEvent& event ) { event.Skip(); }
 		virtual void OnPaletteClick( wxMouseEvent& event ) { event.Skip(); }
 		virtual void SaveChanges( wxCommandEvent& event ) { event.Skip(); }
@@ -152,7 +162,7 @@ class GUIFrame : public wxFrame
 	
 	public:
 		
-		GUIFrame( wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = _("GBS"), const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxSize( 712,600 ), long style = wxDEFAULT_FRAME_STYLE|wxTAB_TRAVERSAL );
+		GUIFrame( wxWindow* parent, wxWindowID id = wxID_ANY, const wxString& title = _("GBS"), const wxPoint& pos = wxDefaultPosition, const wxSize& size = wxSize( 783,728 ), long style = wxDEFAULT_FRAME_STYLE|wxTAB_TRAVERSAL );
 		
 		~GUIFrame();
 	

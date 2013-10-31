@@ -1,5 +1,5 @@
 ///////////////////////////////////////////////////////////////////////////
-// C++ code generated with wxFormBuilder (version Mar  8 2011)
+// C++ code generated with wxFormBuilder (version Oct  8 2012)
 // http://www.wxformbuilder.org/
 //
 // PLEASE DO "NOT" EDIT THIS FILE!
@@ -29,7 +29,9 @@ HexNumberDialog::HexNumberDialog( wxWindow* parent, wxWindowID id, const wxStrin
 	sbSizer5 = new wxStaticBoxSizer( new wxStaticBox( m_panel2, wxID_ANY, wxT("Enter a number in hexadecimal:") ), wxVERTICAL );
 	
 	textCtrl = new wxTextCtrl( m_panel2, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0 );
+	textCtrl->SetMaxLength( 0 ); 
 	sbSizer5->Add( textCtrl, 0, wxALL|wxALIGN_CENTER_HORIZONTAL|wxEXPAND, 5 );
+	
 	
 	fgSizer2->Add( sbSizer5, 1, wxEXPAND|wxRIGHT|wxLEFT, 5 );
 	
@@ -37,17 +39,20 @@ HexNumberDialog::HexNumberDialog( wxWindow* parent, wxWindowID id, const wxStrin
 	gSizer6 = new wxGridSizer( 1, 2, 0, 0 );
 	
 	OKBtn = new wxButton( m_panel2, wxID_OK, wxT("OK"), wxDefaultPosition, wxSize( -1,20 ), 0 );
-	gSizer6->Add( OKBtn, 0, wxALL, 5 );
+	gSizer6->Add( OKBtn, 0, wxALL|wxALIGN_CENTER_HORIZONTAL, 5 );
 	
 	CancelBtn = new wxButton( m_panel2, wxID_CANCEL, wxT("Cancel"), wxDefaultPosition, wxSize( -1,20 ), 0 );
-	gSizer6->Add( CancelBtn, 0, wxALL, 5 );
+	gSizer6->Add( CancelBtn, 0, wxALL|wxALIGN_CENTER_HORIZONTAL, 5 );
+	
 	
 	fgSizer2->Add( gSizer6, 1, wxEXPAND, 5 );
+	
 	
 	m_panel2->SetSizer( fgSizer2 );
 	m_panel2->Layout();
 	fgSizer2->Fit( m_panel2 );
 	gSizer4->Add( m_panel2, 1, wxEXPAND|wxALIGN_CENTER_VERTICAL, 5 );
+	
 	
 	this->SetSizer( gSizer4 );
 	this->Layout();
