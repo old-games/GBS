@@ -68,6 +68,10 @@
 		<Unit filename="../settings.h" />
 		<Unit filename="../slstrings.cpp" />
 		<Unit filename="../slstrings.h" />
+		<Unit filename="../unlzexe.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../unlzexe.h" />
 		<Unit filename="../version.h" />
 		<Unit filename="../vgapal.h" />
 		<Unit filename="../wx_pch.cpp" />
