@@ -122,6 +122,7 @@ class GraphBitStreamerFrame: public GUIFrame
 		void          FillSizeChoice(wxChoice* choice);
 		void          SetStandardSize(bool width, int size);
 		bool          LoadProject(const wxString& path);
+		bool          SaveProject();
 		bool          SaveProject(const wxString& path);
 		wxString      SelectFile(bool project);
 
@@ -159,7 +160,8 @@ class GraphBitStreamerFrame: public GUIFrame
 		virtual void OnSettingsMenu( wxCommandEvent& event );
 		virtual void OnExportRAW( wxCommandEvent& event );
 		virtual void DataModeChanged( wxCommandEvent& event );
-
+		virtual void OnUnpackLZexe( wxCommandEvent& event );
+		
 		void FillModeChoice();
         bool Quit();
 

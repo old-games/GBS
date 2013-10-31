@@ -40,30 +40,31 @@
 #define idMenuLoad 1000
 #define idMenuLoadState 1001
 #define idMenuSaveState 1002
-#define idMenuQuit 1003
-#define idImportBMP 1004
-#define idExportBMP 1005
-#define idExportRAW 1006
-#define idSettingsMenu 1007
-#define idLoadPlatte 1008
-#define idMenuAbout 1009
-#define wxID_ANY_PANEL 1010
-#define wxID_DATA_MODE_CHOICE 1011
-#define wxID_BITS_SLIDER 1012
-#define wxID_BITS_CTRL 1013
-#define wxID_START_SLIDER 1014
-#define wxID_START_CTRL 1015
-#define wxID_WIDTH_CHOICE 1016
-#define wxID_WIDTH_SLIDER 1017
-#define wxID_WIDTH_CTRL 1018
-#define wxID_HEIGHT_CHOICE 1019
-#define wxID_HEIGHT_SLIDER 1020
-#define wxID_HEIGHT_CTRL 1021
-#define wxID_ZOOM_SLIDER 1022
-#define wxID_ZOOM_CTRL 1023
-#define idFlipImage 1024
-#define idRotateLeft 1025
-#define idRotateRight 1026
+#define idMenuUnpackLzexe 1003
+#define idMenuQuit 1004
+#define idImportBMP 1005
+#define idExportBMP 1006
+#define idExportRAW 1007
+#define idSettingsMenu 1008
+#define idLoadPlatte 1009
+#define idMenuAbout 1010
+#define wxID_ANY_PANEL 1011
+#define wxID_DATA_MODE_CHOICE 1012
+#define wxID_BITS_SLIDER 1013
+#define wxID_BITS_CTRL 1014
+#define wxID_START_SLIDER 1015
+#define wxID_START_CTRL 1016
+#define wxID_WIDTH_CHOICE 1017
+#define wxID_WIDTH_SLIDER 1018
+#define wxID_WIDTH_CTRL 1019
+#define wxID_HEIGHT_CHOICE 1020
+#define wxID_HEIGHT_SLIDER 1021
+#define wxID_HEIGHT_CTRL 1022
+#define wxID_ZOOM_SLIDER 1023
+#define wxID_ZOOM_CTRL 1024
+#define idFlipImage 1025
+#define idRotateLeft 1026
+#define idRotateRight 1027
 
 ///////////////////////////////////////////////////////////////////////////////
 /// Class GUIFrame
@@ -131,6 +132,7 @@ class GUIFrame : public wxFrame
 		virtual void onMenuFileLoad( wxCommandEvent& event ) { event.Skip(); }
 		virtual void OnLoadState( wxCommandEvent& event ) { event.Skip(); }
 		virtual void OnSaveState( wxCommandEvent& event ) { event.Skip(); }
+		virtual void OnUnpackLZexe( wxCommandEvent& event ) { event.Skip(); }
 		virtual void OnQuit( wxCommandEvent& event ) { event.Skip(); }
 		virtual void OnImportBMP( wxCommandEvent& event ) { event.Skip(); }
 		virtual void OnExportBMP( wxCommandEvent& event ) { event.Skip(); }

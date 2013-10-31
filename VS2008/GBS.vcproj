@@ -41,7 +41,7 @@
 				Name="VCCLCompilerTool"
 				Optimization="0"
 				AdditionalIncludeDirectories="$(WXWIN)/include;$(WXWIN)/lib/vc_lib/mswud"
-				PreprocessorDefinitions="__WXMSW__;WIN32;wxUSE_GUI=1;wxUSE_UNICODE;__WXDEBUG__;_UNICODE"
+				PreprocessorDefinitions="__WXMSW__;WIN32;wxUSE_GUI=1;wxUSE_UNICODE;__WXDEBUG__;_UNICODE;_CRT_SECURE_NO_WARNINGS"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
 				RuntimeLibrary="1"
@@ -117,7 +117,7 @@
 				Optimization="2"
 				EnableIntrinsicFunctions="true"
 				AdditionalIncludeDirectories="$(WXWIN)/include;$(WXWIN)/lib/vc_lib/mswu"
-				PreprocessorDefinitions="__WXMSW__;WIN32;__WIN32__;wxUSE_GUI=1;wxUSE_UNICODE;NDEBUG"
+				PreprocessorDefinitions="__WXMSW__;WIN32;__WIN32__;wxUSE_GUI=1;wxUSE_UNICODE;NDEBUG;_CRT_SECURE_NO_WARNINGS"
 				RuntimeLibrary="0"
 				EnableFunctionLevelLinking="true"
 				UsePrecompiledHeader="2"
@@ -260,6 +260,26 @@
 				>
 			</File>
 			<File
+				RelativePath="..\unlzexe.c"
+				>
+				<FileConfiguration
+					Name="Debug|Win32"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						UsePrecompiledHeader="0"
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Release|Win32"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						UsePrecompiledHeader="0"
+					/>
+				</FileConfiguration>
+			</File>
+			<File
 				RelativePath="..\wx_pch.cpp"
 				>
 			</File>
@@ -319,6 +339,10 @@
 			</File>
 			<File
 				RelativePath="..\slstrings.h"
+				>
+			</File>
+			<File
+				RelativePath="..\unlzexe.h"
 				>
 			</File>
 			<File

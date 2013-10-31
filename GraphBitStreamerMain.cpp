@@ -15,6 +15,11 @@
 #include "version.h"
 #include "vgapal.h"
 
+extern "C"
+{
+#include "unlzexe.h"
+}
+
 #define PROJECT_EXTENSION "gbs"
 #define SIZES_NUM 20
 static int SIZES[SIZES_NUM] =
@@ -228,7 +233,7 @@ wxString GraphBitStreamerFrame::SelectFile(bool project)
 	wxFileDialog openFileDialog(this,
 		project ? ("Open project file") : _("Open any file"),
 		wxEmptyString, wxEmptyString,
-		project ? "GBS files (*.GBS)|*.GBS" : "All files (*.*)|*.*",
+		project ? "GBS files (*.gbs)|*.gbs" : "All files (*.*)|*.*",
 		wxFD_OPEN|wxFD_FILE_MUST_EXIST);
 
 	if (openFileDialog.ShowModal() == wxID_CANCEL)
@@ -407,32 +412,44 @@ bool GraphBitStreamerFrame::SaveProject(const wxString& path)
 	val = mDataMode;
 	tmp.Write(&val, 4);
 	tmp.Close();
-
+	mProjectName = path;
 	return true;
 }
 
 
 void GraphBitStreamerFrame::OnSaveState( wxCommandEvent& event )
 {
+	SaveProject();
+}
+
+
+
+bool GraphBitStreamerFrame::SaveProject()
+{
 	if (mFileName == "")
 	{
 		wxLogError("There are nothing to save!");
-		return;
+		return false;
 	}
+	
 	wxFileName name(mFileName);
 
-	if (mProjectName == "")
+	wxString projName = mProjectName;
+	
+	if (projName.IsEmpty())
 	{
-		mProjectName = name.GetName() + ".GBS";
+		projName = name.GetName() + ".gbs";
 	}
 
-	wxFileDialog saveStateDialog(this, _("Save project file"), "", mProjectName,
-		"GBS files (*.GBS)|*.GBS", wxFD_SAVE | wxFD_OVERWRITE_PROMPT);
+	wxFileDialog saveStateDialog(this, _("Save project file"), "", projName,
+		"GBS files (*.gbs)|*.gbs", wxFD_SAVE | wxFD_OVERWRITE_PROMPT);
 
 	if (saveStateDialog.ShowModal() == wxID_OK)
 	{
-		SaveProject(saveStateDialog.GetPath());
+		return SaveProject(saveStateDialog.GetPath());
 	}
+	
+	return false;
 }
 
 
@@ -553,7 +570,11 @@ void GraphBitStreamerFrame::pack()
 	::wxCopyFile(mFileName, mFileName+".bak", true);
 	mFile.Seek(seekPos, wxFromStart);
 	mFile.Write(buf, mBitByteSize);
+
 	free(buf);
+	
+	wxFileName fname(mFileName);
+	fname.Touch();
 }
 
 
@@ -700,9 +721,16 @@ void GraphBitStreamerFrame::OnClose(wxCloseEvent &event)
 {
 	if (!Quit()) return;
 
-	if (!mProjectName.IsEmpty() && mSettings->isAutoSave())
+	if (mSettings->isAutoSave())
 	{
-		SaveProject(mProjectName);
+		if (!mProjectName.IsEmpty())
+		{
+			SaveProject(mProjectName);
+		}
+		else
+		{
+			SaveProject();
+		}
 	}
 
 	Destroy();
@@ -1231,8 +1259,8 @@ void GraphBitStreamerFrame::OnExportBMP( wxCommandEvent& event )
 	int bpp = mSettings->getBMPBits();
 	if (bitSlider->GetValue() >= 8 && bitSlider->GetValue() - bpp < 0) wxMessageBox(wxString::Format("Bpp of image: %d, bpp of BMP: %d", bitSlider->GetValue(), bpp), "Warning! Loss of data!");
 	wxFileName name(mFileName);
-	wxFileDialog saveBmpDialog(this, _("Save BMP file"), "", name.GetName()+".BMP",
-						   "BMP files (*.BMP)|*.BMP", wxFD_SAVE | wxFD_OVERWRITE_PROMPT);
+	wxFileDialog saveBmpDialog(this, _("Save BMP file"), "", name.GetName()+".bmp",
+						   "BMP files (*.bmp)|*.bmp", wxFD_SAVE | wxFD_OVERWRITE_PROMPT);
 	if (saveBmpDialog.ShowModal() == wxID_CANCEL) return;
 	BMPIE bexport(red, green, blue);
 	bexport.saveBMP(mUnpacked, saveBmpDialog.GetPath(), widthSlider->GetValue(), heightSlider->GetValue(), bpp);
@@ -1241,7 +1269,7 @@ void GraphBitStreamerFrame::OnExportBMP( wxCommandEvent& event )
 void GraphBitStreamerFrame::OnImportBMP( wxCommandEvent& event )
 {
 	wxFileDialog loadBmpDialog(this, _("Open BMP file"), "", "",
-						   "BMP files (*.BMP)|*.BMP", wxFD_OPEN | wxFD_FILE_MUST_EXIST);
+						   "BMP files (*.bmp)|*.bmp", wxFD_OPEN | wxFD_FILE_MUST_EXIST);
 	if (loadBmpDialog.ShowModal() == wxID_CANCEL) return;
 	BMPIE bimport(red, green, blue);
 	int bpp;
@@ -1321,3 +1349,36 @@ void GraphBitStreamerFrame::OnSettingsMenu( wxCommandEvent& event )
 {
 	mSettings->ShowModal();
 }
+
+
+
+/* virtual */ void GraphBitStreamerFrame::OnUnpackLZexe( wxCommandEvent& event )
+{
+	wxString file = SelectFile(false);
+	
+	if (file.IsEmpty())
+	{
+		return;
+	}
+	
+	wxFileName fnamein(file);
+	wxString outname = fnamein.GetPath() + wxFileName::GetPathSeparator() + fnamein.GetName() + ".unpacked";
+	
+	if (wxFileName::FileExists(outname))
+	{
+		wxMessageBox(outname + " exists already!");
+		return;
+	}
+	
+	if (unpackLZexe(file.ToStdString().c_str(), outname.ToStdString().c_str()) == 0)
+	{
+		wxMessageBox("There was an error while unpacking " + file);
+	}
+	else
+	{
+		wxMessageBox(outname + " created!");
+	}
+}
+
+
+

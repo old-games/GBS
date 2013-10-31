@@ -38,6 +38,7 @@
 	#include "splash.xpm"
 #endif // WX_PRECOMP
 
+
 typedef unsigned char		uchar;
 typedef unsigned short	ushort;
 typedef unsigned int		uint;

@@ -67,6 +67,17 @@ GUIFrame::GUIFrame( wxWindow* parent, wxWindowID id, const wxString& title, cons
 	
 	fileMenu->AppendSeparator();
 	
+	wxMenuItem* menuUnlzexe;
+	menuUnlzexe = new wxMenuItem( fileMenu, idMenuUnpackLzexe, wxString( _("Unpack EXE from LZ91") ) , _("Unpack EXE from LZ91"), wxITEM_NORMAL );
+	#ifdef __WXMSW__
+	menuUnlzexe->SetBitmaps( wxArtProvider::GetBitmap( wxART_FILE_OPEN, wxART_MENU ) );
+	#elif defined( __WXGTK__ )
+	menuUnlzexe->SetBitmap( wxArtProvider::GetBitmap( wxART_FILE_OPEN, wxART_MENU ) );
+	#endif
+	fileMenu->Append( menuUnlzexe );
+	
+	fileMenu->AppendSeparator();
+	
 	wxMenuItem* menuFileQuit;
 	menuFileQuit = new wxMenuItem( fileMenu, idMenuQuit, wxString( _("&Quit") ) + wxT('\t') + wxT("Alt+F4"), _("Quit the application"), wxITEM_NORMAL );
 	#ifdef __WXMSW__
@@ -405,6 +416,7 @@ GUIFrame::GUIFrame( wxWindow* parent, wxWindowID id, const wxString& title, cons
 	this->Connect( menuFileLoad->GetId(), wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( GUIFrame::onMenuFileLoad ) );
 	this->Connect( menuLoadState->GetId(), wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( GUIFrame::OnLoadState ) );
 	this->Connect( menuSaveState->GetId(), wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( GUIFrame::OnSaveState ) );
+	this->Connect( menuUnlzexe->GetId(), wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( GUIFrame::OnUnpackLZexe ) );
 	this->Connect( menuFileQuit->GetId(), wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( GUIFrame::OnQuit ) );
 	this->Connect( menuImportBMP->GetId(), wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( GUIFrame::OnImportBMP ) );
 	this->Connect( menuExportBMP->GetId(), wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( GUIFrame::OnExportBMP ) );
@@ -502,6 +514,7 @@ GUIFrame::~GUIFrame()
 	this->Disconnect( idMenuLoad, wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( GUIFrame::onMenuFileLoad ) );
 	this->Disconnect( idMenuLoadState, wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( GUIFrame::OnLoadState ) );
 	this->Disconnect( idMenuSaveState, wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( GUIFrame::OnSaveState ) );
+	this->Disconnect( idMenuUnpackLzexe, wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( GUIFrame::OnUnpackLZexe ) );
 	this->Disconnect( idMenuQuit, wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( GUIFrame::OnQuit ) );
 	this->Disconnect( idImportBMP, wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( GUIFrame::OnImportBMP ) );
 	this->Disconnect( idExportBMP, wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( GUIFrame::OnExportBMP ) );
