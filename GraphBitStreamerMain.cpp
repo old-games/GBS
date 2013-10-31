@@ -345,6 +345,7 @@ bool GraphBitStreamerFrame::LoadProject(const wxString& path)
 	tmp.Close();
 	mProjectName = path;
 	updateControls();
+	return true;
 }
 
 
@@ -819,7 +820,6 @@ void GraphBitStreamerFrame::OnGridCheck( wxCommandEvent& event )
 void GraphBitStreamerFrame::OnMenuPalLoad( wxCommandEvent& event )
 {
 	PalLoad();
-	event.Skip();
 }
 
 void GraphBitStreamerFrame::PalLoad()

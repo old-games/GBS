@@ -61,6 +61,7 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
+				AdditionalDependencies="Rpcrt4.lib comctl32.lib wxbase30ud.lib wxbase30ud_net.lib wxbase30ud_xml.lib wxexpatd.lib wxjpegd.lib wxmsw30ud_adv.lib wxmsw30ud_aui.lib wxmsw30ud_core.lib wxmsw30ud_gl.lib wxmsw30ud_html.lib wxmsw30ud_media.lib wxmsw30ud_propgrid.lib wxmsw30ud_qa.lib wxmsw30ud_ribbon.lib wxmsw30ud_richtext.lib wxmsw30ud_stc.lib wxmsw30ud_webview.lib wxmsw30ud_xrc.lib wxpngd.lib wxregexud.lib wxscintillad.lib wxtiffd.lib wxzlibd.lib"
 				OutputFile="$(ProjectDir)..\Debug\Windows\$(ProjectName).exe"
 				AdditionalLibraryDirectories="&quot;$(WXWIN)\lib\vc_lib&quot;"
 				GenerateDebugInformation="true"
@@ -135,7 +136,7 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="Rpcrt4.lib comctl32.lib wxbase29u.lib wxbase29u_net.lib wxbase29u_xml.lib wxexpat.lib wxjpeg.lib wxmsw29u_adv.lib wxmsw29u_aui.lib wxmsw29u_core.lib wxmsw29u_gl.lib wxmsw29u_html.lib wxmsw29u_media.lib wxmsw29u_propgrid.lib wxmsw29u_qa.lib wxmsw29u_ribbon.lib wxmsw29u_richtext.lib wxmsw29u_stc.lib wxmsw29u_webview.lib wxmsw29u_xrc.lib wxpng.lib wxregexu.lib wxscintilla.lib wxtiff.lib wxzlib.lib"
+				AdditionalDependencies="Rpcrt4.lib comctl32.lib wxbase30u.lib wxbase30u_net.lib wxbase30u_xml.lib wxexpat.lib wxjpeg.lib wxmsw30u_adv.lib wxmsw30u_aui.lib wxmsw30u_core.lib wxmsw30u_gl.lib wxmsw30u_html.lib wxmsw30u_media.lib wxmsw30u_propgrid.lib wxmsw30u_qa.lib wxmsw30u_ribbon.lib wxmsw30u_richtext.lib wxmsw30u_stc.lib wxmsw30u_webview.lib wxmsw30u_xrc.lib wxpng.lib wxregexu.lib wxscintilla.lib wxtiff.lib wxzlib.lib"
 				OutputFile="$(ProjectDir)..\Release\Windows\$(ProjectName).exe"
 				AdditionalLibraryDirectories="&quot;$(WXWIN)\lib\vc_lib&quot;"
 				GenerateDebugInformation="false"
@@ -176,6 +177,10 @@
 			>
 			<File
 				RelativePath="..\bmpie.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\datamode.cpp"
 				>
 			</File>
 			<File
@@ -266,6 +271,10 @@
 			>
 			<File
 				RelativePath="..\bmpie.h"
+				>
+			</File>
+			<File
+				RelativePath="..\datamode.h"
 				>
 			</File>
 			<File
