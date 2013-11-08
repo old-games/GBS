@@ -63,7 +63,6 @@ GraphBitStreamerFrame::GraphBitStreamerFrame(wxFrame *frame):
 	mDataMode(DataMode::dmRaw)
 {
 	ReallocateUnpacked();
-	mDataProcessor.SetSource(mUnpacked, mUnpackedSize);
 	mImage = new ScrolledImageComponent(m_panel1, wxID_ANY);
 	mImage->Connect( wxEVT_MOTION, wxMouseEventHandler( GraphBitStreamerFrame::OnOutputMotion ), NULL, this );
 	mImage->Connect( wxEVT_LEFT_DOWN, wxMouseEventHandler( GraphBitStreamerFrame::OnOutputLeftClick), NULL, this );
@@ -127,9 +126,10 @@ void GraphBitStreamerFrame::ReallocateUnpacked()
 	if (newSize > mUnpackedSize || mUnpacked == NULL)
 	{
 		mUnpackedSize = newSize;
-		free(mUnpacked);
-		mUnpacked = (DataBuffer *) malloc(mUnpackedSize);
-		//mUnpacked = (DataBuffer *) realloc(mUnpacked, mUnpackedSize);
+		//free(mUnpacked);
+		//mUnpacked = (DataBuffer *) malloc(mUnpackedSize);
+		mUnpacked = (DataBuffer *) realloc(mUnpacked, mUnpackedSize);
+		mDataProcessor.SetSource(mUnpacked, mUnpackedSize);
 	}
 }
 
