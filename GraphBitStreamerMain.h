@@ -103,6 +103,7 @@ class GraphBitStreamerFrame: public GUIFrame
         SettingsDlg *mSettings;
         // функции
         void          pack();
+        void          ReallocateUnpacked();
         void          unpack(uint bitPos, uchar bitCount);
         void          updateControls(bool reaload = true);
         void          SetStandardPal();
@@ -161,7 +162,7 @@ class GraphBitStreamerFrame: public GUIFrame
 		virtual void OnExportRAW( wxCommandEvent& event );
 		virtual void DataModeChanged( wxCommandEvent& event );
 		virtual void OnUnpackLZexe( wxCommandEvent& event );
-		
+
 		void FillModeChoice();
         bool Quit();
 

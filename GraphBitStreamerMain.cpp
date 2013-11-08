@@ -57,11 +57,12 @@ inline void swap64(uint64 &x)
 
 GraphBitStreamerFrame::GraphBitStreamerFrame(wxFrame *frame):
 	GUIFrame(frame),
+	mUnpackedSize(0),
+	mUnpacked(NULL),
 	mDataProcessor(red, green, blue),
 	mDataMode(DataMode::dmRaw)
 {
-	mUnpackedSize = widthSlider->GetMax()*heightSlider->GetMax()*sizeof(mUnpacked[0]);
-	mUnpacked=(DataBuffer *) malloc(mUnpackedSize);
+	ReallocateUnpacked();
 	mDataProcessor.SetSource(mUnpacked, mUnpackedSize);
 	mImage = new ScrolledImageComponent(m_panel1, wxID_ANY);
 	mImage->Connect( wxEVT_MOTION, wxMouseEventHandler( GraphBitStreamerFrame::OnOutputMotion ), NULL, this );
@@ -115,6 +116,23 @@ GraphBitStreamerFrame::~GraphBitStreamerFrame()
 	delete mGetHex;
 	delete mSettings;
 }
+
+
+
+void GraphBitStreamerFrame::ReallocateUnpacked()
+{
+	long newSize = widthSlider->GetValue() *
+		heightSlider->GetValue() * sizeof(mUnpacked[0]);
+
+	if (newSize > mUnpackedSize || mUnpacked == NULL)
+	{
+		mUnpackedSize = newSize;
+		free(mUnpacked);
+		mUnpacked = (DataBuffer *) malloc(mUnpackedSize);
+		//mUnpacked = (DataBuffer *) realloc(mUnpacked, mUnpackedSize);
+	}
+}
+
 
 
 
@@ -431,11 +449,11 @@ bool GraphBitStreamerFrame::SaveProject()
 		wxLogError("There are nothing to save!");
 		return false;
 	}
-	
+
 	wxFileName name(mFileName);
 
 	wxString projName = mProjectName;
-	
+
 	if (projName.IsEmpty())
 	{
 		projName = name.GetName() + ".gbs";
@@ -448,7 +466,7 @@ bool GraphBitStreamerFrame::SaveProject()
 	{
 		return SaveProject(saveStateDialog.GetPath());
 	}
-	
+
 	return false;
 }
 
@@ -458,6 +476,7 @@ void GraphBitStreamerFrame::updateControls(bool reload)
 {
 	if (!mFile.IsOpened()) return;
 
+	ReallocateUnpacked();
 	if (reload)
 	{
 		bool egaMode = IsEGASpecialMode();
@@ -572,7 +591,7 @@ void GraphBitStreamerFrame::pack()
 	mFile.Write(buf, mBitByteSize);
 
 	free(buf);
-	
+
 	wxFileName fname(mFileName);
 	fname.Touch();
 }
@@ -1355,21 +1374,21 @@ void GraphBitStreamerFrame::OnSettingsMenu( wxCommandEvent& event )
 /* virtual */ void GraphBitStreamerFrame::OnUnpackLZexe( wxCommandEvent& event )
 {
 	wxString file = SelectFile(false);
-	
+
 	if (file.IsEmpty())
 	{
 		return;
 	}
-	
+
 	wxFileName fnamein(file);
 	wxString outname = fnamein.GetPath() + wxFileName::GetPathSeparator() + fnamein.GetName() + ".unpacked";
-	
+
 	if (wxFileName::FileExists(outname))
 	{
 		wxMessageBox(outname + " exists already!");
 		return;
 	}
-	
+
 	if (unpackLZexe(file.ToStdString().c_str(), outname.ToStdString().c_str()) == 0)
 	{
 		wxMessageBox("There was an error while unpacking " + file);
