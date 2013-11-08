@@ -123,6 +123,11 @@ void GraphBitStreamerFrame::ReallocateUnpacked()
 	long newSize = widthSlider->GetValue() *
 		heightSlider->GetValue() * sizeof(mUnpacked[0]);
 
+	if (IsEGASpecialMode())
+	{
+		newSize <<= 2;	// i'm sorry, it's awful =)
+	}
+
 	if (newSize > mUnpackedSize || mUnpacked == NULL)
 	{
 		mUnpackedSize = newSize;
@@ -476,9 +481,10 @@ void GraphBitStreamerFrame::updateControls(bool reload)
 {
 	if (!mFile.IsOpened()) return;
 
-	ReallocateUnpacked();
+
 	if (reload)
 	{
+		ReallocateUnpacked();
 		bool egaMode = IsEGASpecialMode();
 
 		int bits = egaMode ? 1 : bitSlider->GetValue();
