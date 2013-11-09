@@ -134,6 +134,7 @@ void GraphBitStreamerFrame::ReallocateUnpacked()
 		//free(mUnpacked);
 		//mUnpacked = (DataBuffer *) malloc(mUnpackedSize);
 		mUnpacked = (DataBuffer *) realloc(mUnpacked, mUnpackedSize);
+		memset(mUnpacked, 0, mUnpackedSize);
 		mDataProcessor.SetSource(mUnpacked, mUnpackedSize);
 	}
 }
