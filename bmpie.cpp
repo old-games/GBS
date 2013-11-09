@@ -90,7 +90,6 @@ bool BMPIE::saveBMP(void* src, wxString name, int width, int height, int bpp)
     bfile.Write(newbuf, ihead.biSizeImage);
     free(newbuf);
     bfile.Close();
-    wxMessageBox(name + wxT(" was created."));
     return true;
 }
 

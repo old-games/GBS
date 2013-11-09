@@ -15,6 +15,9 @@ class SettingsDlg: public SettingsDialog
 		virtual int ShowModal();
 		~SettingsDlg();
 
+		int getIncrement();
+		void setIncrement(int v);
+
 //	static wxString GetSettingsPath();
 //	static void LoadSettings();
 //	static void SaveSettings();

@@ -18,6 +18,8 @@
 #include <wx/settings.h>
 #include <wx/gbsizer.h>
 #include <wx/checkbox.h>
+#include <wx/stattext.h>
+#include <wx/spinctrl.h>
 #include <wx/sizer.h>
 #include <wx/statbox.h>
 #include <wx/button.h>
@@ -40,6 +42,8 @@ class SettingsDialog : public wxDialog
 		wxRadioBox* rawSettings;
 		wxRadioBox* bmpSettings;
 		wxCheckBox* mAutoSaveProjectCheck;
+		wxStaticText* m_staticText1;
+		wxSpinCtrl* mIncrementValue;
 		wxButton* OKBtn;
 		wxButton* CancelBtn;
 	

@@ -33,6 +33,16 @@ int SettingsDlg::getBMPBits()
 	return gsBMP[bmpSettings->GetSelection()];
 }
 
+int SettingsDlg::getIncrement()
+{
+	return mIncrementValue->GetValue();
+}
+
+void SettingsDlg::setIncrement(int v)
+{
+	mIncrementValue->SetValue(v);
+}
+
 bool SettingsDlg::isAutoSave()
 {
 	return mAutoSaveProjectCheck->IsChecked();
@@ -76,12 +86,14 @@ int SettingsDlg::ShowModal()
 	int oldRaw = rawSettings->GetSelection();
 	int oldBmp = bmpSettings->GetSelection();
 	bool oldAuto = mAutoSaveProjectCheck->IsChecked();
+	int oldIncrement = mIncrementValue->GetValue();
 
 	if (res = SettingsDialog::ShowModal() != wxID_OK)
 	{
 		rawSettings->SetSelection(oldRaw);
 		bmpSettings->SetSelection(oldBmp);
 		mAutoSaveProjectCheck->SetValue(oldAuto);
+		mIncrementValue->SetValue(oldIncrement);
 	}
 //	else
 //	{

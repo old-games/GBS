@@ -106,6 +106,14 @@ GUIFrame::GUIFrame( wxWindow* parent, wxWindowID id, const wxString& title, cons
 	#endif
 	editMenu->Append( menuExportBMP );
 	
+	menuFastExportBMP = new wxMenuItem( editMenu, idFastExportBMP, wxString( _("&Fast export BMP") ) + wxT('\t') + wxT("F7"), _("Creates BMP with increment to filename"), wxITEM_NORMAL );
+	#ifdef __WXMSW__
+	menuFastExportBMP->SetBitmaps( wxBitmap( bmpout1_xpm ) );
+	#elif defined( __WXGTK__ )
+	menuFastExportBMP->SetBitmap( wxBitmap( bmpout1_xpm ) );
+	#endif
+	editMenu->Append( menuFastExportBMP );
+	
 	editMenu->AppendSeparator();
 	
 	menuExportRAW = new wxMenuItem( editMenu, idExportRAW, wxString( _("&RAW export") ) + wxT('\t') + wxT("F6"), _("Exports raw data"), wxITEM_NORMAL );
@@ -420,6 +428,7 @@ GUIFrame::GUIFrame( wxWindow* parent, wxWindowID id, const wxString& title, cons
 	this->Connect( menuFileQuit->GetId(), wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( GUIFrame::OnQuit ) );
 	this->Connect( menuImportBMP->GetId(), wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( GUIFrame::OnImportBMP ) );
 	this->Connect( menuExportBMP->GetId(), wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( GUIFrame::OnExportBMP ) );
+	this->Connect( menuFastExportBMP->GetId(), wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( GUIFrame::OnFastExportBMP ) );
 	this->Connect( menuExportRAW->GetId(), wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( GUIFrame::OnExportRAW ) );
 	this->Connect( menuSettings->GetId(), wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( GUIFrame::OnSettingsMenu ) );
 	this->Connect( menuPaletteLoad->GetId(), wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( GUIFrame::OnMenuPalLoad ) );
@@ -518,6 +527,7 @@ GUIFrame::~GUIFrame()
 	this->Disconnect( idMenuQuit, wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( GUIFrame::OnQuit ) );
 	this->Disconnect( idImportBMP, wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( GUIFrame::OnImportBMP ) );
 	this->Disconnect( idExportBMP, wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( GUIFrame::OnExportBMP ) );
+	this->Disconnect( idFastExportBMP, wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( GUIFrame::OnFastExportBMP ) );
 	this->Disconnect( idExportRAW, wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( GUIFrame::OnExportRAW ) );
 	this->Disconnect( idSettingsMenu, wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( GUIFrame::OnSettingsMenu ) );
 	this->Disconnect( idLoadPlatte, wxEVT_COMMAND_MENU_SELECTED, wxCommandEventHandler( GUIFrame::OnMenuPalLoad ) );

@@ -51,6 +51,22 @@ SettingsDialog::SettingsDialog( wxWindow* parent, wxWindowID id, const wxString&
 	mAutoSaveProjectCheck = new wxCheckBox( m_panel2, wxID_AUTO_SAVE_CHECK, wxT("Auto save project on exit"), wxDefaultPosition, wxDefaultSize, 0 );
 	sbSizer1->Add( mAutoSaveProjectCheck, 0, wxALL, 5 );
 	
+	wxFlexGridSizer* fgSizer21;
+	fgSizer21 = new wxFlexGridSizer( 1, 2, 0, 0 );
+	fgSizer21->AddGrowableCol( 1 );
+	fgSizer21->SetFlexibleDirection( wxBOTH );
+	fgSizer21->SetNonFlexibleGrowMode( wxFLEX_GROWMODE_SPECIFIED );
+	
+	m_staticText1 = new wxStaticText( m_panel2, wxID_ANY, wxT("Current increment:"), wxDefaultPosition, wxDefaultSize, 0 );
+	m_staticText1->Wrap( -1 );
+	fgSizer21->Add( m_staticText1, 0, wxALL|wxALIGN_CENTER_VERTICAL, 5 );
+	
+	mIncrementValue = new wxSpinCtrl( m_panel2, wxID_ANY, wxEmptyString, wxDefaultPosition, wxDefaultSize, wxSP_ARROW_KEYS, -1, 999, -1 );
+	fgSizer21->Add( mIncrementValue, 0, wxALL|wxEXPAND, 5 );
+	
+	
+	sbSizer1->Add( fgSizer21, 1, wxEXPAND, 5 );
+	
 	
 	fgSizer2->Add( sbSizer1, 1, wxEXPAND, 5 );
 	

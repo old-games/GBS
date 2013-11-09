@@ -231,3 +231,16 @@ void DataProcessor::ProcessData(DataMode::Mode mode, PaletteMode palMode,
 }
 
 
+
+bool DataProcessor::ExportToBMP(const wxString& name)
+{
+	if (mWidth <= 0 || mHeight <= 0 || mDest == NULL)
+	{
+		return false;
+	}
+
+	wxImage image(mWidth, mHeight, mDest, true);
+	return image.IsOk() ? image.SaveFile(name, wxBITMAP_TYPE_BMP) : false;
+}
+
+

@@ -22,6 +22,9 @@ extern "C"
 
 #define PROJECT_EXTENSION "gbs"
 #define SIZES_NUM 20
+#define MIN_INCREMENT_VALUE 0
+#define MAX_INCREMENT_VALUE 999
+
 static int SIZES[SIZES_NUM] =
 {
 	4, 8, 16, 24, 32, 48,
@@ -60,6 +63,8 @@ GraphBitStreamerFrame::GraphBitStreamerFrame(wxFrame *frame):
 	mUnpackedSize(0),
 	mUnpacked(NULL),
 	mDataProcessor(red, green, blue),
+	mExportIncrement(-1),
+	mExportName(wxEmptyString),
 	mDataMode(DataMode::dmRaw)
 {
 	ReallocateUnpacked();
@@ -73,6 +78,7 @@ GraphBitStreamerFrame::GraphBitStreamerFrame(wxFrame *frame):
 	mOpenPal = new PalDialog(this);
 	mGetHex = new HexNum(this);
 	mSettings = new SettingsDlg(this);
+	mSettings->setIncrement(mExportIncrement);
 	mImageSize = 0;
 	mBitImageSize = 0;
 	mBitByteSize = 0;
@@ -269,7 +275,6 @@ wxString GraphBitStreamerFrame::SelectFile(bool project)
 }
 
 
-
 bool GraphBitStreamerFrame::LoadFromCmdLine(const wxString& path)
 {
 	wxLogDebug("LoadFromCmdLine: %s", path);
@@ -320,9 +325,8 @@ bool GraphBitStreamerFrame::LoadProject(const wxString& path)
 
 	startSlider->SetRange(0, mFile.Length() * 8);
 	startCtrl->SetRange(0, mFile.Length() * 8);
-	TurnControls(true);
 
-	unsigned int val = 0;
+	wxUint32 val = 0;
 	tmp.Read(&val, 4);
 	bitSlider->SetValue(val);
 	bitsCtrl->SetValue(val);
@@ -356,7 +360,9 @@ bool GraphBitStreamerFrame::LoadProject(const wxString& path)
 		palChoice->SetSelection(val);
 		PalChanged();
 	}
-	int x;
+
+	int x = 0;
+	val = 0;
 
 	if (tmp.Read(&x, 4) != 0)
 	{
@@ -371,8 +377,21 @@ bool GraphBitStreamerFrame::LoadProject(const wxString& path)
 		mReadOnly = IsEGASpecialMode();
 	}
 
+	if (tmp.Read(&val, 4) == 4)
+	{
+		mExportIncrement = val;
+		mSettings->setIncrement(mExportIncrement);
+
+		if (loadString(&tmp, tmpString))
+		{
+			mExportName = tmpString;
+		}
+	}
+
 	tmp.Close();
 	mProjectName = path;
+
+	TurnControls(true);
 	updateControls();
 	return true;
 }
@@ -403,7 +422,7 @@ bool GraphBitStreamerFrame::SaveProject(const wxString& path)
 	wxFile tmp;
 	tmp.Create(path, true);
 	saveString(&tmp, mFileName);
-	unsigned int val = bitSlider->GetValue();
+	wxUint32 val = bitSlider->GetValue();
 	tmp.Write(&val, 4);
 	val = startSlider->GetValue();
 	tmp.Write(&val, 4);
@@ -435,6 +454,9 @@ bool GraphBitStreamerFrame::SaveProject(const wxString& path)
 	tmp.Write(&val, 4);
 	val = mDataMode;
 	tmp.Write(&val, 4);
+	val = mExportIncrement;
+	tmp.Write(&val, 4);
+	saveString(&tmp, mExportName);
 	tmp.Close();
 	mProjectName = path;
 	return true;
@@ -1131,6 +1153,7 @@ void GraphBitStreamerFrame::TurnControls(bool b)
 	menuSaveState->Enable(b);
 	menuImportBMP->Enable(b);
 	menuExportBMP->Enable(b);
+	menuFastExportBMP->Enable(b);
 	menuExportRAW->Enable(b);
 	palChoice->Enable(raw ? b : false);
 	mainToolBar->EnableTool(idMenuSaveState, b);
@@ -1280,17 +1303,143 @@ void GraphBitStreamerFrame::OnExportRAW( wxCommandEvent& event )
 	wxMessageBox(name.GetFullName() + wxT(" was created."));
 }
 
+
+
+wxString GraphBitStreamerFrame::SelectExportBmpFile(wxString basename)
+{
+	wxFileName name(mFileName);
+	wxFileDialog saveBmpDialog(this, _("Save BMP file"), "", basename,
+						"BMP files (*.bmp)|*.bmp", wxFD_SAVE);
+
+	if (saveBmpDialog.ShowModal() == wxID_CANCEL)
+	{
+		return wxEmptyString;
+	}
+
+	return saveBmpDialog.GetPath();
+}
+
+
+
 void GraphBitStreamerFrame::OnExportBMP( wxCommandEvent& event )
 {
 	int bpp = mSettings->getBMPBits();
-	if (bitSlider->GetValue() >= 8 && bitSlider->GetValue() - bpp < 0) wxMessageBox(wxString::Format("Bpp of image: %d, bpp of BMP: %d", bitSlider->GetValue(), bpp), "Warning! Loss of data!");
+
+	if (bitSlider->GetValue() >= 8 && bitSlider->GetValue() - bpp < 0)
+	{
+		wxMessageBox(wxString::Format("Bpp of image: %d, bpp of BMP: %d", bitSlider->GetValue(), bpp), "Warning! Loss of data!");
+	}
+
 	wxFileName name(mFileName);
-	wxFileDialog saveBmpDialog(this, _("Save BMP file"), "", name.GetName()+".bmp",
-						   "BMP files (*.bmp)|*.bmp", wxFD_SAVE | wxFD_OVERWRITE_PROMPT);
-	if (saveBmpDialog.ShowModal() == wxID_CANCEL) return;
-	BMPIE bexport(red, green, blue);
-	bexport.saveBMP(mUnpacked, saveBmpDialog.GetPath(), widthSlider->GetValue(), heightSlider->GetValue(), bpp);
+	wxString path = SelectExportBmpFile(name.GetName() + ".bmp");
+
+	if (path.IsEmpty())
+	{
+		return;
+	}
+
+	DoExportBmp(path, false);
 }
+
+
+
+void GraphBitStreamerFrame::DoFastExport()
+{
+	wxFileName name(mExportName);
+	wxString fname = wxString::Format("%s/%s_%0.3d.bmp", name.GetPath(), name.GetName(), mExportIncrement);
+
+	if (DoExportBmp(fname, true))
+	{
+		++mExportIncrement;
+
+		if (mExportIncrement > MAX_INCREMENT_VALUE)
+		{
+			mExportIncrement = MIN_INCREMENT_VALUE;
+		}
+	}
+}
+
+
+
+bool GraphBitStreamerFrame::DoExportBmp(const wxString& fname, bool silent)
+{
+	bool res = false;
+
+	wxFileName file(fname);
+
+	if (file.Exists())
+	{
+		wxMessageDialog dlg(this, fname + " already exists!", "Overwrite?", wxYES_NO | wxCENTRE);
+		
+		if (dlg.ShowModal() != wxID_YES)
+		{
+			return false;
+		}
+	}
+
+	if (!IsEGASpecialMode())
+	{
+		int bpp = mSettings->getBMPBits();
+		BMPIE bexport(red, green, blue);
+		bexport.saveBMP(mUnpacked, fname, widthSlider->GetValue(), heightSlider->GetValue(), bpp);
+		res = bexport.saveBMP(mUnpacked, fname, widthSlider->GetValue(), heightSlider->GetValue(), bpp);
+	}
+	else
+	{
+		res = bmp && bmp->SaveFile(fname, wxBITMAP_TYPE_BMP);
+	}
+
+	if (res)
+	{
+		if (silent)
+		{
+			statusBar->SetStatusText(fname + " exported!", 0);
+		}
+		else
+		{
+			wxMessageBox(fname + wxT(" was created."));
+		}
+	}
+
+	return res;
+}
+
+
+
+/* virtual */ void GraphBitStreamerFrame::OnFastExportBMP( wxCommandEvent& event )
+{
+	if (mExportIncrement == -1)
+	{
+		mExportIncrement = 0;
+
+		//wxTextEntryDialog getInc(this, "Enter first digit (0..999) to add to filename");
+		//getInc.SetTextValidator(wxTextValidator(wxFILTER_NUMERIC));
+		//long tmp = 0;
+
+		//if (getInc.ShowModal() == wxID_CANCEL)
+		//{
+		//	return;
+		//}
+
+		//if (!getInc.GetValue().ToLong(&tmp) || tmp < MIN_INCREMENT_VALUE || tmp > MAX_INCREMENT_VALUE)
+		//{
+		//	wxMessageBox(wxString::Format("Wrong value! Can be only [%d; %d]", MIN_INCREMENT_VALUE, MAX_INCREMENT_VALUE));
+		//	return;
+		//}
+
+		//mExportIncrement = tmp;
+	}
+
+	if (mExportName.IsEmpty())
+	{
+		wxFileName name(mFileName);
+		mExportName = SelectExportBmpFile(name.GetName() + ".bmp");
+	}
+
+	DoFastExport();
+}
+
+
 
 void GraphBitStreamerFrame::OnImportBMP( wxCommandEvent& event )
 {
@@ -1373,7 +1522,12 @@ void GraphBitStreamerFrame::RestorePos(int pos)
 
 void GraphBitStreamerFrame::OnSettingsMenu( wxCommandEvent& event )
 {
-	mSettings->ShowModal();
+	mSettings->setIncrement(mExportIncrement);
+
+	if (mSettings->ShowModal() == wxID_OK)
+	{
+		mExportIncrement = mSettings->getIncrement();
+	}
 }
 
 

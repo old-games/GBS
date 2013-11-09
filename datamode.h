@@ -47,6 +47,8 @@ class DataProcessor
 		void ProcessData(DataMode::Mode mode, PaletteMode palMode,
 			int width, int height,
 			unsigned char *dest, int maxColours);
+		
+		bool ExportToBMP(const wxString& name);
 	private:
 
 		void ProcessRaw();

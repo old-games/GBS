@@ -96,6 +96,8 @@ class GraphBitStreamerFrame: public GUIFrame
         bool changed;
         bool mReadOnly;
         int mRotate;
+		int mExportIncrement;
+		wxString mExportName;
         Position mPos[MAXPOS];
         //
         PalDialog* mOpenPal;
@@ -126,6 +128,9 @@ class GraphBitStreamerFrame: public GUIFrame
 		bool          SaveProject();
 		bool          SaveProject(const wxString& path);
 		wxString      SelectFile(bool project);
+		void          DoFastExport();
+		bool          DoExportBmp(const wxString& fname, bool silent);
+		wxString      SelectExportBmpFile(wxString basename);
 
 		virtual void OnSizeChoice( wxCommandEvent& event );
         virtual void OnClose(wxCloseEvent& event);
@@ -162,6 +167,8 @@ class GraphBitStreamerFrame: public GUIFrame
 		virtual void OnExportRAW( wxCommandEvent& event );
 		virtual void DataModeChanged( wxCommandEvent& event );
 		virtual void OnUnpackLZexe( wxCommandEvent& event );
+		virtual void OnFastExportBMP( wxCommandEvent& event );
+
 
 		void FillModeChoice();
         bool Quit();

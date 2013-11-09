@@ -32,7 +32,6 @@ public:
         bitmap = bmp;
         /* init scrolled area size, scrolling speed, etc. */
         SetScrollbars(1,1, w, h, 0, 0);
-
     }
 
     void setScale(int s)

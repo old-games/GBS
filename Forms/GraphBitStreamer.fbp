@@ -257,6 +257,21 @@
                         <event name="OnMenuSelection">OnExportBMP</event>
                         <event name="OnUpdateUI"></event>
                     </object>
+                    <object class="wxMenuItem" expanded="1">
+                        <property name="bitmap">Load From File; ../icons/bmpout1.xpm</property>
+                        <property name="checked">0</property>
+                        <property name="enabled">1</property>
+                        <property name="help">Creates BMP with increment to filename</property>
+                        <property name="id">idFastExportBMP</property>
+                        <property name="kind">wxITEM_NORMAL</property>
+                        <property name="label">&amp;Fast export BMP</property>
+                        <property name="name">menuFastExportBMP</property>
+                        <property name="permission">protected</property>
+                        <property name="shortcut">F7</property>
+                        <property name="unchecked_bitmap"></property>
+                        <event name="OnMenuSelection">OnFastExportBMP</event>
+                        <event name="OnUpdateUI"></event>
+                    </object>
                     <object class="separator" expanded="0">
                         <property name="name">m_separator3</property>
                         <property name="permission">none</property>

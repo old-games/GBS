@@ -44,27 +44,28 @@
 #define idMenuQuit 1004
 #define idImportBMP 1005
 #define idExportBMP 1006
-#define idExportRAW 1007
-#define idSettingsMenu 1008
-#define idLoadPlatte 1009
-#define idMenuAbout 1010
-#define wxID_ANY_PANEL 1011
-#define wxID_DATA_MODE_CHOICE 1012
-#define wxID_BITS_SLIDER 1013
-#define wxID_BITS_CTRL 1014
-#define wxID_START_SLIDER 1015
-#define wxID_START_CTRL 1016
-#define wxID_WIDTH_CHOICE 1017
-#define wxID_WIDTH_SLIDER 1018
-#define wxID_WIDTH_CTRL 1019
-#define wxID_HEIGHT_CHOICE 1020
-#define wxID_HEIGHT_SLIDER 1021
-#define wxID_HEIGHT_CTRL 1022
-#define wxID_ZOOM_SLIDER 1023
-#define wxID_ZOOM_CTRL 1024
-#define idFlipImage 1025
-#define idRotateLeft 1026
-#define idRotateRight 1027
+#define idFastExportBMP 1007
+#define idExportRAW 1008
+#define idSettingsMenu 1009
+#define idLoadPlatte 1010
+#define idMenuAbout 1011
+#define wxID_ANY_PANEL 1012
+#define wxID_DATA_MODE_CHOICE 1013
+#define wxID_BITS_SLIDER 1014
+#define wxID_BITS_CTRL 1015
+#define wxID_START_SLIDER 1016
+#define wxID_START_CTRL 1017
+#define wxID_WIDTH_CHOICE 1018
+#define wxID_WIDTH_SLIDER 1019
+#define wxID_WIDTH_CTRL 1020
+#define wxID_HEIGHT_CHOICE 1021
+#define wxID_HEIGHT_SLIDER 1022
+#define wxID_HEIGHT_CTRL 1023
+#define wxID_ZOOM_SLIDER 1024
+#define wxID_ZOOM_CTRL 1025
+#define idFlipImage 1026
+#define idRotateLeft 1027
+#define idRotateRight 1028
 
 ///////////////////////////////////////////////////////////////////////////////
 /// Class GUIFrame
@@ -80,6 +81,7 @@ class GUIFrame : public wxFrame
 		wxMenu* editMenu;
 		wxMenuItem* menuImportBMP;
 		wxMenuItem* menuExportBMP;
+		wxMenuItem* menuFastExportBMP;
 		wxMenuItem* menuExportRAW;
 		wxMenu* palMenu;
 		wxMenu* helpMenu;
@@ -136,6 +138,7 @@ class GUIFrame : public wxFrame
 		virtual void OnQuit( wxCommandEvent& event ) { event.Skip(); }
 		virtual void OnImportBMP( wxCommandEvent& event ) { event.Skip(); }
 		virtual void OnExportBMP( wxCommandEvent& event ) { event.Skip(); }
+		virtual void OnFastExportBMP( wxCommandEvent& event ) { event.Skip(); }
 		virtual void OnExportRAW( wxCommandEvent& event ) { event.Skip(); }
 		virtual void OnSettingsMenu( wxCommandEvent& event ) { event.Skip(); }
 		virtual void OnMenuPalLoad( wxCommandEvent& event ) { event.Skip(); }

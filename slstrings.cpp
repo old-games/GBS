@@ -22,15 +22,29 @@ wxString RUStoUTF(unsigned char *in)
     return _("");
 };
 
-void loadString(wxFile *file, wxString &str)
+
+
+bool loadString(wxFile *file, wxString &str)
 {
-    unsigned char *buf= (unsigned char *) malloc(512);
-    unsigned long size;
-    file->Read(&size, sizeof(size));
-    file->Read(buf, size);
-    str=RUStoUTF(buf);
-    free(buf);
+	unsigned char *buf= (unsigned char *) malloc(512);
+	unsigned long size;
+	bool res = false;
+
+	if (file->Read(&size, sizeof(size)) == sizeof(size));
+	{
+		res = file->Read(buf, size) == size;
+
+		if (res)
+		{
+			str=RUStoUTF(buf);
+		}
+	}
+	free(buf);
+
+	return res;
 };
+
+
 
 void saveString (wxFile *file, wxString str)
 {
