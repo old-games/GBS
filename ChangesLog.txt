@@ -1,6 +1,7 @@
 10 February 2014
   version 1.2.5 beta
   -Fixed: EGA Row-planar, надо тестировать.
+  -Updated: Тип палитры в EGA Modes теперь можно выбирать, т.е. он не блокируется на EGA только.
 
 10 November 2013
   version 1.2.4 beta
