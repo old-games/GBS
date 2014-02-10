@@ -143,22 +143,19 @@ void DataProcessor::ProcessRPEGA()
 	unsigned char col = 0;
 	unsigned int srcOffset = 0;
 	unsigned int destOffset = 0;
-	//wxLogDebug("%dx%d", mWidth, mHeight);
-	int offset = 2;
-	int offset1 = 4;
-	int offset2 = 6;
+	unsigned int offs2 = mWidth;
+	unsigned int offs3 = mWidth * 2;
+	unsigned int offs4 = mWidth * 3;
 
 	for (int i = 0; i < mHeight; ++i)
 	{
-		for (int j = 0; j < mWidth >> 1; ++j)
+		for (int j = 0; j < mWidth; ++j)
 		{
-			ApplyEgaPoint(destOffset, srcOffset,
-				srcOffset + offset, srcOffset + offset1, srcOffset + offset2);
+			ApplyEgaPoint(destOffset, srcOffset, srcOffset + offs2, srcOffset + offs3, srcOffset + offs4);
 			++srcOffset;
-			ApplyEgaPoint(destOffset, srcOffset,
-				srcOffset + offset, srcOffset + offset1, srcOffset + offset2);
-			srcOffset += 7;
 		}
+
+		srcOffset += offs4;
 	}
 }
 
@@ -169,22 +166,16 @@ void DataProcessor::ProcessBPEGA()
 	unsigned char col = 0;
 	unsigned int srcOffset = 0;
 	unsigned int destOffset = 0;
-	//int step = 1; //mWidth >> 2;
-	int ofs1 = 1;
-	int ofs2 = 2;
-	int ofs3 = 3;
 
 	for (int i = 0; i < mHeight; ++i)
 	{
 		for (int j = 0; j < mWidth; ++j)
 		{
 			ApplyEgaPoint(destOffset, srcOffset,
-				srcOffset + ofs1, srcOffset + ofs2, srcOffset + ofs3);
+				srcOffset + 1, srcOffset + 2, srcOffset + 3);
 			srcOffset += 4;
 		}
-
 	}
-
 }
 
 

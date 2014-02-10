@@ -1155,7 +1155,7 @@ void GraphBitStreamerFrame::TurnControls(bool b)
 	menuExportBMP->Enable(b);
 	menuFastExportBMP->Enable(b);
 	menuExportRAW->Enable(b);
-	palChoice->Enable(raw ? b : false);
+	palChoice->Enable(b);
 	mainToolBar->EnableTool(idMenuSaveState, b);
 	mainToolBar->EnableTool(idImportBMP, b);
 	mainToolBar->EnableTool(idExportBMP, b);

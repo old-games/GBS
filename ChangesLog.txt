@@ -1,3 +1,7 @@
+10 February 2014
+  version 1.2.5 beta
+  -Fixed: EGA Row-planar, надо тестировать.
+
 10 November 2013
   version 1.2.4 beta
   -Added: быстрый экспорт с инкрементом числа в имени файла.
