@@ -1,0 +1,4 @@
+wxSTD_MDIPARENTFRAME ICON "../icons/rc_gbs_small.ico"
+wxSTD_MDICHILDFRAME  ICON "../icons/rc_gbs_small.ico"
+wxSTD_FRAME          ICON "../icons/rc_gbs_large.ico"
+//#include <wx/msw/wx.rc>
